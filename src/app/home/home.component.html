@@ -1,3 +1,13 @@
-<form action="">
-  
-</form>
+<div class="container mt-3">
+  <section>
+    <form [formGroup]="searchForm" class="d-flex flex-column justify-content-between p-3" (ngSubmit)="search()">
+      <div>
+        <input class="form-control" type="search" name="restuarant" id="restaurant" formControlName="restaurant">
+      </div>
+      <div class="mt-3">
+        <input class="form-control" type="search" name="location" id="location" formControlName="location">
+      </div>
+      <button class="btn btn-submit my-3" type="submit">SEARCH</button>
+    </form>
+  </section>
+</div>
