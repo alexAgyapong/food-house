@@ -2,12 +2,20 @@
   <section>
     <form [formGroup]="searchForm" class="d-flex flex-column justify-content-between p-3" (ngSubmit)="search()">
       <div>
-        <input class="form-control" type="search" name="restuarant" id="restaurant" formControlName="restaurant">
+        <input class="form-control" type="search" name="location" id="location" formControlName="location"
+          placeholder="LOCATION" (selectItem)="onLocationSelected($event)" [ngbTypeahead]="suggestions" [focusFirst]="false"  autocomplete="off"
+          [inputFormatter]="formatter" [resultTemplate]="citiesResult" >
       </div>
       <div class="mt-3">
-        <input class="form-control" type="search" name="location" id="location" formControlName="location">
+        <input class="form-control" type="search" name="restuarant" id="restaurant" formControlName="restaurant"
+          placeholder="RESTAURANT NAME">
       </div>
       <button class="btn btn-submit my-3" type="submit">SEARCH</button>
     </form>
   </section>
 </div>
+
+<ng-template #citiesResult let-r="result" let-t="term">
+  <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px"> -->
+  <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>
