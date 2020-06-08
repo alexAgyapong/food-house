@@ -1,0 +1,10 @@
+.cards-category{
+ display: grid;
+ grid-template-columns: repeat(2,1fr);
+}
+
+.card-category{
+  @include displayFlex(column, center, center);
+  padding: 1rem;
+  background-color: white;
+}

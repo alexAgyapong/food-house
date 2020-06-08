@@ -1,23 +1,51 @@
-<div class="container mt-3">
-  <section>
-    <form [formGroup]="searchForm" class="d-flex flex-column justify-content-between p-3" (ngSubmit)="search()">
-      <div>
-        <input class="form-control" type="search" name="location" id="location" formControlName="location"
-          placeholder="LOCATION" (selectItem)="onLocationSelected($event)" [ngbTypeahead]="suggestions" [focusFirst]="false"  autocomplete="off"
-          [inputFormatter]="formatter" [resultTemplate]="citiesResult" >
-      </div>
-      <div class="mt-3">
-        <input class="form-control" type="search" name="restuarant" id="restaurant" formControlName="restaurant"
-          placeholder="RESTAURANT NAME">
-      </div>
-      <button class="btn btn-submit my-3" type="submit">SEARCH</button>
-    </form>
-  </section>
-  <section>
-    
-  </section>
-</div>
-
+<main class="wrapper">
+  <div class="parallax-bg">
+    <div class="container parallax-content mt-3">
+      <section>
+        <form [formGroup]="searchForm" class="d-flex flex-column justify-content-between p-3" (ngSubmit)="search()">
+          <div>
+            <input class="form-control" type="search" name="location" id="location" formControlName="location"
+              placeholder="LOCATION" (selectItem)="onLocationSelected($event)" [ngbTypeahead]="suggestions"
+              [focusFirst]="false" autocomplete="off" [inputFormatter]="formatter" [resultTemplate]="citiesResult">
+          </div>
+          <div class="mt-3">
+            <input class="form-control" type="search" name="restuarant" id="restaurant" formControlName="restaurant"
+              placeholder="RESTAURANT NAME">
+          </div>
+          <button class="btn btn-submit my-3" type="submit">SEARCH</button>
+        </form>
+      </section>
+      <section>
+        <div class="cards-category border-transparent rounded border-gray">
+          <a class="card-category border-right border-bottom border-gray" href="#">
+            <ion-icon class="mt-2" name="fast-food-outline"></ion-icon>
+            <span class="my-3">BREAKFAST</span>
+          </a>
+          <a class="card-category border-bottom border-gray" href="#">
+            <ion-icon class="mt-2" name="fast-food-outline"></ion-icon>
+            <span class="my-3 text-capitalize">lunch</span>
+          </a>
+          <a class="card-category border-right border-bottom border-gray" href="#">
+            <ion-icon class="mt-2" name="fast-food-outline"></ion-icon>
+            <span class="my-3">DINNER</span>
+          </a>
+          <a class="card-category border-bottom border-gray" href="#">
+            <ion-icon class="mt-2" name="fast-food-outline"></ion-icon>
+            <span class="my-3 text-capitalize">nightlife</span>
+          </a>
+          <a class="card-category border-right border-gray" href="#">
+            <ion-icon class="mt-2" name="fast-food-outline"></ion-icon>
+            <span class="my-3">DELIVERY</span>
+          </a>
+          <a class="card-category border-gray" href="#">
+            <ion-icon class="mt-2" name="fast-food-outline"></ion-icon>
+            <span class="my-3">TAKE AWAY</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
 <ng-template #citiesResult let-r="result" let-t="term">
   <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px"> -->
   <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>

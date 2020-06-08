@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
       restaurant: [''],
       location: ['']
     });
-      console.log(StringUtility.toCamelCase('a_value_not_pretty'));
+    
     // this.restaurantService.searchRestuarant().subscribe(res => console.log('in home', res));
     // this.searchForm.valueChanges.pipe(debounceTime(1)).subscribe(data => {
     //   if (data && data.location) {
