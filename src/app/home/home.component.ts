@@ -4,6 +4,7 @@ import { RestaurantService } from './../shared/services/restaurant.service';
 import { debounceTime, tap, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { LocationSuggestion } from '../shared/models/location';
+import { Category, CategoryEnum } from './../shared/models/category';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   formatter: (x: { name: string; }) => string;
   cityId: number;
   suggestions: (searchTerm$: Observable<string>) => Observable<LocationSuggestion[]>;
+  selectedCategories: Category[];
 
   constructor(private fb: FormBuilder, private restaurantService: RestaurantService) { }
 
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
     //     this.getCitiesAutocomplete(data.location);
     //   }
     // });
+    // this.getCategories();
     this.suggestions = (searchTerm$: Observable<string>) => searchTerm$
       .pipe(
         debounceTime(100),
@@ -47,6 +50,17 @@ export class HomeComponent implements OnInit {
     this.restaurantService.searchCitiesByName(locationName).subscribe(res => {
       this.locationSuggestions$ = of(res);
       console.log('cities', res);
+    });
+  }
+
+  getCategories() {
+    const categoryArray = [CategoryEnum.Breakfast, CategoryEnum.Lunch,
+    CategoryEnum.Dinner, CategoryEnum.Delivery, CategoryEnum.Takeaway];
+    this.restaurantService.getCategories().subscribe((res: Category[]) => {
+      console.log('cate in home comp', res);
+      if (res && res.length) {
+        this.selectedCategories = res.filter(({ categories }) => categoryArray.includes(categories.id));
+      }
     });
   }
 

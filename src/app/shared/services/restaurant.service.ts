@@ -6,6 +6,7 @@ import { Restaurant } from '../models/restaurant';
 import { tap, map } from 'rxjs/operators';
 import { LocationResult } from '../models/location';
 import { LocationSuggestion } from './../models/location';
+import { Category, CategoriesResult } from './../models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,15 @@ export class RestaurantService {
 
   constructor(private http: HttpClient) { }
 
+  getCategories(): Observable<Category[]> {
+    const url = `${environment.baseUrl}/categories`;
+
+    return this.http.get<CategoriesResult>(url)
+      .pipe(
+        map(res => res.categories),
+        tap(data => console.log('categories', data))
+      );
+  }
   searchRestuarant(): Observable<Restaurant[]> {
     const url = `${environment.baseUrl}/search`;
 
