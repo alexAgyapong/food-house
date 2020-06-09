@@ -1,7 +1,38 @@
-.border-gray{
+.border-gray {
   color: gray;
 }
 
-.border-transparent{
+.border-transparent {
   border: 1px solid white;
+}
+
+.w-40 {
+  width: 40% !important;
+}
+.w-30 {
+  width: 30% !important;
+}
+.w-20 {
+  width: 20% !important;
+}
+.w-sm-40 {
+  @include breakpoint(laptop){
+    @media screen {
+      width: 40% !important;
+    }
+  }
+}
+.w-sm-30 {
+  @include breakpoint(laptop){
+    @media screen {
+      width: 30% !important;
+    }
+  }
+}
+.w-sm-20 {
+  @include breakpoint(laptop){
+    @media screen {
+      width: 20% !important;
+    }
+  }
 }
