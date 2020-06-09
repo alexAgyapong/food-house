@@ -1,10 +1,33 @@
-.cards-category{
- display: grid;
- grid-template-columns: repeat(2,1fr);
+.cards-category {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.card-category{
+.card-category {
   @include displayFlex(column, center, center);
   padding: 1rem;
   background-color: white;
+  &:hover {
+    background-color: $coral;
+    color: white;
+    span {
+      font-weight: 500;
+    }
+  }
+}
+
+.cards {
+}
+.card-item {
+  @include displayFlex(column);
+  .card-content {
+    @include displayFlex(column);
+  }
+  p {
+    margin-bottom: .2rem;
+  }
+  font-size: large;
+}
+.card-footer-content {
+  @include displayFlex(row, space-around);
 }

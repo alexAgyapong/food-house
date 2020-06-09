@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Libraries
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { RatingModule } from 'ng-starrating';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbTypeaheadModule
+    NgbTypeaheadModule,
+    RatingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }

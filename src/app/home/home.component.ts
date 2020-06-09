@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RestaurantService } from './../shared/services/restaurant.service';
-import { debounceTime, tap, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import { debounceTime, tap, distinctUntilChanged, switchMap, catchError, map } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { LocationSuggestion } from '../shared/models/location';
 import { Category, CategoryEnum } from './../shared/models/category';
 import StringUtility from './../shared/string-utility';
+import { BestRatedRestaurant, Restaurant } from '../shared/models/restaurant';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   cityId: number;
   suggestions: (searchTerm$: Observable<string>) => Observable<LocationSuggestion[]>;
   selectedCategories: Category[];
+  topRatedRestaurants$ = new Observable<Restaurant[]>();
 
   constructor(private fb: FormBuilder, private restaurantService: RestaurantService) { }
 
@@ -28,8 +30,8 @@ export class HomeComponent implements OnInit {
       restaurant: [''],
       location: ['']
     });
-    
-    // this.restaurantService.searchRestuarant().subscribe(res => console.log('in home', res));
+
+    this.getTopRatedRestaurants();
     // this.searchForm.valueChanges.pipe(debounceTime(1)).subscribe(data => {
     //   if (data && data.location) {
     //     this.getCitiesAutocomplete(data.location);
@@ -47,7 +49,12 @@ export class HomeComponent implements OnInit {
     this.formatter = (x: { name: string }) => x.name;
   }
 
-  private getCitiesAutocomplete(locationName: string) {
+  getTopRatedRestaurants() {
+    this.topRatedRestaurants$ = this.restaurantService.getTopRatedRestaurants(61, 'group')
+      .pipe(map(res => res.map(x => x.restaurant)));
+  }
+
+  getCitiesAutocomplete(locationName: string) {
     this.restaurantService.searchCitiesByName(locationName).subscribe(res => {
       this.locationSuggestions$ = of(res);
       console.log('cities', res);
