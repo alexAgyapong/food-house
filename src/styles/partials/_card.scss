@@ -27,6 +27,7 @@
     margin-bottom: .2rem;
   }
   font-size: large;
+  margin-bottom: 1rem;
 }
 .card-footer-content {
   @include displayFlex(row, space-around);

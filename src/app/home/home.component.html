@@ -50,9 +50,9 @@
   <h3 class="text-center">CHOOSE FROM TOP RATED</h3>
   <h5 class="text-center mb-3">Explore bars, restaurants and cafes by locality</h5>
   <div class="cards" *ngFor="let topRated of topRatedRestaurants$|async">
-    <a class="card-item">
+    <a class="card-item border border-gray rounded">
       <ng-container *ngIf="topRated?.featured_image; else noImage">
-        <img [src]="topRated?.featured_image" class="card-img-top mt-3" alt="Featured Image">
+        <img [src]="topRated?.featured_image" class="card-img-top" alt="Featured Image">
       </ng-container>
       <div class="card-content ml-3">
         <h5 class="card-title font-weight-bold mt-2 pt-2">{{topRated?.name}}</h5>
@@ -75,7 +75,7 @@
 
 <!-- ng templates -->
 <ng-template #noImage>
-  <img src="https://via.placeholder.com/468x60?text=NO IMAGE" class="card-img-top mt-3" alt="NO IMAGE">
+  <img src="https://via.placeholder.com/468x60?text=NO IMAGE" class="card-img-top" alt="NO IMAGE">
 </ng-template>
 <ng-template #citiesResult let-r="result" let-t="term">
   <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px"> -->
