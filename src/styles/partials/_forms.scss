@@ -1,0 +1,7 @@
+.inline-form-layout {
+  @include breakpoint(laptop) {
+    @media screen {
+      @include displayFlex(row, space-around,center);
+    }
+  }
+}

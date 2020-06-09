@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
       location: ['']
     });
 
-    this.getTopRatedRestaurants();
+    // this.getTopRatedRestaurants();
     // this.searchForm.valueChanges.pipe(debounceTime(1)).subscribe(data => {
     //   if (data && data.location) {
     //     this.getCitiesAutocomplete(data.location);

@@ -1,6 +1,11 @@
 .cards-category {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  @include breakpoint(laptop){
+    @media screen {
+      grid-template-columns: repeat(6,1fr);
+    }
+  }
 }
 
 .card-category {

@@ -1,18 +1,22 @@
 <div class="parallax-block">
   <div class="parallax-bg">
-    <div class="container parallax-content mt-3">
+    <div class="container parallax-content mt-3 mt-sm-0">
       <section>
-        <form [formGroup]="searchForm" class="d-flex flex-column justify-content-between p-3" (ngSubmit)="search()">
-          <div>
-            <input class="form-control" type="search" name="location" id="location" formControlName="location"
-              placeholder="LOCATION" (selectItem)="onLocationSelected($event)" [ngbTypeahead]="suggestions"
-              [focusFirst]="false" autocomplete="off" [inputFormatter]="formatter" [resultTemplate]="citiesResult">
-          </div>
-          <div class="mt-3">
-            <input class="form-control" type="search" name="restuarant" id="restaurant" formControlName="restaurant"
-              placeholder="RESTAURANT NAME">
-          </div>
-          <button class="btn btn-submit my-3" type="submit">SEARCH</button>
+        <h1 class="text-white text-center pt-5">FIND RESTAURANTS NEAR YOU</h1>
+        <H5 class="text-white text-center">DELIVERED FRESH AND HOT AT YOUR DOORSTEP</H5>
+        <form [formGroup]="searchForm" class="inline-form-layout" (ngSubmit)="search()">
+         <div class="d-flex flex-column justify-content-between flex-sm-row p-3 mt-sm-3 w-100">
+            <div class="mt-sm-0 mr-sm-2 w-sm-40">
+              <input class="form-control" type="search" name="location" id="location" formControlName="location"
+                placeholder="LOCATION" (selectItem)="onLocationSelected($event)" [ngbTypeahead]="suggestions"
+                [focusFirst]="false" autocomplete="off" [inputFormatter]="formatter" [resultTemplate]="citiesResult">
+            </div>
+            <div class="mt-3 mt-sm-0 mx-sm-2 w-sm-40">
+              <input class="form-control" type="search" name="restuarant" id="restaurant" formControlName="restaurant"
+                placeholder="RESTAURANT NAME">
+            </div>
+            <button class="btn btn-submit my-3 my-sm-0 ml-sm-2 w-sm-20" type="submit">SEARCH</button>
+         </div>
         </form>
       </section>
       <section class="p-3">
@@ -46,7 +50,7 @@
     </div>
   </div>
 </div>
-<section class="mt-5 p-1">
+<section class="top-rated mt-5 p-1">
   <h3 class="text-center">CHOOSE FROM TOP RATED</h3>
   <h5 class="text-center mb-3">Explore bars, restaurants and cafes by locality</h5>
   <div class="cards" *ngFor="let topRated of topRatedRestaurants$|async">
