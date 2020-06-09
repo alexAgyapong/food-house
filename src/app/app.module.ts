@@ -12,12 +12,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Libraries
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingModule } from 'ng-starrating';
+import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
+import { RestaurantListComponent } from './restaurants/restaurant-list/restaurant-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    RestaurantDetailsComponent,
+    RestaurantListComponent
   ],
   imports: [
     BrowserModule,
