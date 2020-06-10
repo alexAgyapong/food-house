@@ -5,7 +5,7 @@
         <h1 class="text-white text-center pt-5">FIND RESTAURANTS NEAR YOU</h1>
         <H5 class="text-white text-center">DELIVERED FRESH AND HOT AT YOUR DOORSTEP</H5>
         <form [formGroup]="searchForm" class="inline-form-layout" (ngSubmit)="search()">
-         <div class="d-flex flex-column justify-content-between flex-sm-row p-3 mt-sm-3 w-100">
+          <div class="d-flex flex-column justify-content-between flex-sm-row p-3 mt-sm-3 w-100">
             <div class="mt-sm-0 mr-sm-2 w-sm-40">
               <input class="form-control" type="search" name="location" id="location" formControlName="location"
                 placeholder="LOCATION" (selectItem)="onLocationSelected($event)" [ngbTypeahead]="suggestions"
@@ -16,7 +16,7 @@
                 placeholder="RESTAURANT NAME">
             </div>
             <button class="btn btn-submit my-3 my-sm-0 ml-sm-2 w-sm-20" type="submit">SEARCH</button>
-         </div>
+          </div>
         </form>
       </section>
       <section class="p-3">
@@ -53,33 +53,35 @@
 <section class="top-rated mt-5 p-1">
   <h3 class="text-center">CHOOSE FROM TOP RATED</h3>
   <h5 class="text-center mb-3">Explore bars, restaurants and cafes by locality</h5>
-  <div class="cards" *ngFor="let topRated of topRatedRestaurants$|async">
-    <a class="card-item border border-gray rounded">
-      <ng-container *ngIf="topRated?.featured_image; else noImage">
-        <img [src]="topRated?.featured_image" class="card-img-top" alt="Featured Image">
-      </ng-container>
-      <div class="card-content ml-3">
-        <h5 class="card-title font-weight-bold mt-2 pt-2">{{topRated?.name}}</h5>
-        <p class="card-text">{{topRated?.cuisines}}</p>
-        <p class="card-text d-flex justify-content-between align-items-center">
-          <star-rating [value]="topRated?.user_rating?.aggregate_rating" totalstars="5" checkedcolor="red"
-            uncheckedcolor="black" size="24px" readonly="true"></star-rating>
-          <span class="px-1">{{topRated?.user_rating?.aggregate_rating}}</span>
-          <span>({{topRated?.user_rating?.votes}})</span>
-        </p>
-        <p class="card-text">{{topRated?.location?.locality}}</p>
-      </div>
-      <div class="card-footer-content m-3 py-2">
-        <!-- <span><img [src]="topRated?.thumb" alt=""></span> -->
-        <a class="btn btn-submit" href="#">ORDER NOW</a>
-      </div>
-    </a>
+  <div class="cards">
+    <div *ngFor="let topRated of topRatedRestaurants$|async">
+      <a class="card-item border border-gray rounded">
+        <ng-container *ngIf="topRated?.featured_image; else noImage">
+          <img [src]="topRated?.featured_image" class="card-img-top card-image" alt="Featured Image">
+        </ng-container>
+        <div class="card-content ml-3">
+          <h5 class="card-title font-weight-bold mt-2 pt-2">{{topRated?.name}}</h5>
+          <p class="card-text">{{topRated?.cuisines}}</p>
+          <p class="card-text d-flex justify-content-between align-items-center">
+            <star-rating [value]="topRated?.user_rating?.aggregate_rating" totalstars="5" checkedcolor="red"
+              uncheckedcolor="black" size="24px" readonly="true"></star-rating>
+            <span class="px-1">{{topRated?.user_rating?.aggregate_rating}}</span>
+            <span>({{topRated?.user_rating?.votes}})</span>
+          </p>
+          <p class="card-text">{{topRated?.location?.locality}}</p>
+          <div class="card-footer-content my-3 py-2">
+            <!-- <span><img [src]="topRated?.thumb" alt=""></span> -->
+            <a class="btn btn-submit" href="#">ORDER NOW</a>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ng templates -->
 <ng-template #noImage>
-  <img src="https://via.placeholder.com/468x60?text=NO IMAGE" class="card-img-top" alt="NO IMAGE">
+  <img src="https://via.placeholder.com/468x60?text=NO IMAGE" class="card-img-top card-image" alt="NO IMAGE">
 </ng-template>
 <ng-template #citiesResult let-r="result" let-t="term">
   <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px"> -->

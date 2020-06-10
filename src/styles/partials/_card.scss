@@ -1,9 +1,10 @@
 .cards-category {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  @include breakpoint(laptop){
+  @include breakpoint(laptop) {
     @media screen {
-      grid-template-columns: repeat(6,1fr);
+      grid-template-columns: repeat(6, 1fr);
+      margin-bottom: -0.5rem;
     }
   }
 }
@@ -22,17 +23,44 @@
 }
 
 .cards {
+  @include breakpoint(laptop) {
+    @media screen {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap:1rem;
+      padding: 1rem;
+    }
+  }
 }
+
 .card-item {
   @include displayFlex(column);
-  .card-content {
-    @include displayFlex(column);
-  }
   p {
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
   }
   font-size: large;
   margin-bottom: 1rem;
+  @include breakpoint(laptop) {
+    @media screen {
+      // @include displayFlex(row, flex-start);
+      // margin: 1rem;
+      width: 300px;
+    }
+  }
+}
+
+.card-content {
+  @include displayFlex(column);
+}
+
+.card-image {
+  @include breakpoint(laptop) {
+    @media screen {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 .card-footer-content {
   @include displayFlex(row, space-around);
