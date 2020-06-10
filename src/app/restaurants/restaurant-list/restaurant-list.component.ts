@@ -13,7 +13,7 @@ import { tap, map } from 'rxjs/operators';
 })
 export class RestaurantListComponent implements OnInit {
   searchLocation: string;
-  restaurantSearchTerm: string;
+  searchTerm: string;
   restaurants$: Observable<Restaurant[]>;
   // restaurants$ = new Observable<FilteredRestaurant[]>();
 
@@ -21,11 +21,11 @@ export class RestaurantListComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchLocation = this.route.snapshot.paramMap.get('location');
-    this.restaurantSearchTerm = this.route.snapshot.paramMap.get('restaurant-search-term');
+    this.searchTerm = this.route.snapshot.paramMap.get('searchTerm');
     const request = {
       entity_id: this.searchLocation ?? 61,
       entity_type: 'city',
-      query: this.restaurantSearchTerm
+      query: this.searchTerm
     } as unknown as RequestOption;
     this.restaurants$ = this.restaurantService.searchRestuarant(request)
       .pipe(

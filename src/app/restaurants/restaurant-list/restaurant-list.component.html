@@ -4,7 +4,7 @@
     <div>Filters here...</div>
     <div class="cards">
       <div *ngFor="let rest of restaurants$|async">
-        <a class="card-item bg-white border border-gray rounded">
+        <a [routerLink]="['/restaurant', 'details',rest?.id]"  class="card-item text-black bg-white border border-gray rounded">
           <img [src]="rest?.featured_image" class="card-img-top card-image" alt="Featured Image">
           <div class="card-content ml-3">
             <h5 class="card-title font-weight-bold mt-2 pt-2">{{rest?.name}}</h5>

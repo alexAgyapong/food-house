@@ -7,9 +7,9 @@ import { RestaurantDetailsComponent } from './restaurants/restaurant-details/res
 
 const routes: Routes = [
   {
-    path: 'restaurants',
-    component: RestaurantListComponent,
+    path: 'restaurant',
     children: [
+      { path: '', component: RestaurantListComponent },
       { path: 'details/:id', component: RestaurantDetailsComponent }
     ]
   },

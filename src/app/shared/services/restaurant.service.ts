@@ -43,6 +43,20 @@ export class RestaurantService {
       );
   }
 
+  getRestaurantDetailsById(id: number): Observable<Restaurant> {
+    const options = new HttpParams({
+      fromObject: {
+        res_id: id.toString()
+      }
+    });
+    const url = `${environment.baseUrl}/restaurant`;
+
+    return this.http.get<any>(url, { params: options })
+      .pipe(
+        tap(data => console.log('restaurant details', data))
+      );
+  }
+
   getTopRatedRestaurants(entityId: number, entityType: string): Observable<BestRatedRestaurant[]> {
     const options = new HttpParams({
       fromObject: {
