@@ -1,11 +1,11 @@
 export interface Location {
-address: string;
-locality: string;
-city: string;
-latitude: string;
-longitude: string;
-zipcode: string;
-country_id: string;
+  address: string;
+  locality: string;
+  city: string;
+  latitude: string;
+  longitude: string;
+  zipcode: string;
+  country_id: string;
 }
 
 export interface UserRating {
@@ -84,7 +84,7 @@ export interface Result {
   results_found: string;
   results_start: string;
   results_shown: string;
-  restaurants: Restaurant[];
+  restaurants: FilteredRestaurant[];
 }
 
 // export interface Location {
@@ -194,7 +194,11 @@ export interface Restaurant {
   establishment: string[];
 }
 
+
 export interface BestRatedRestaurant {
+  restaurant: Restaurant;
+}
+export interface FilteredRestaurant {
   restaurant: Restaurant;
 }
 
@@ -211,4 +215,10 @@ export interface BestRatedRestaurantResult {
   location: Location;
   num_restaurant: number;
   best_rated_restaurant: BestRatedRestaurant[];
+}
+
+export interface RequestOption {
+  entity_id: number;
+  entity_type: string;
+  query: string;
 }

@@ -32,11 +32,11 @@ export class HomeComponent implements OnInit {
     });
 
     this.getTopRatedRestaurants();
-    // this.searchForm.valueChanges.pipe(debounceTime(1)).subscribe(data => {
-    //   if (data && data.location) {
-    //     this.getCitiesAutocomplete(data.location);
-    //   }
-    // });
+    this.searchForm.valueChanges.pipe(debounceTime(1)).subscribe(data => {
+      if (data && data.location) {
+        this.getCitiesAutocomplete(data.location);
+      }
+    });
     // this.getCategories();
     this.suggestions = (searchTerm$: Observable<string>) => searchTerm$
       .pipe(

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';
-import { Restaurant, BestRatedRestaurantResult } from '../models/restaurant';
+import { Restaurant, BestRatedRestaurantResult, RequestOption, FilteredRestaurant } from '../models/restaurant';
 import { tap, map } from 'rxjs/operators';
 import { LocationResult } from '../models/location';
 import { LocationSuggestion } from './../models/location';
 import { Category, CategoriesResult } from './../models/category';
-import { BestRatedRestaurant } from './../models/restaurant';
+import { BestRatedRestaurant, Result } from './../models/restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +25,21 @@ export class RestaurantService {
         tap(data => console.log('categories', data))
       );
   }
-  searchRestuarant(): Observable<Restaurant[]> {
-    const url = `${environment.baseUrl}/search`;
 
-    return this.http.get<any>(url)
+  searchRestuarant(request: RequestOption): Observable<FilteredRestaurant[]> {
+    const url = `${environment.baseUrl}/search`;
+    const options = new HttpParams({
+      fromObject: {
+        entity_id: request.entity_id.toString(),
+        entity_type: request.entity_type,
+        q: request.query
+      }
+    });
+
+    return this.http.get<Result>(url, { params: options })
       .pipe(
-        map(res => res),
-        tap(data => console.log('search res', data))
+        map(res => res.restaurants),
+        tap(data => console.log('search restaurants', data))
       );
   }
 
@@ -53,9 +61,7 @@ export class RestaurantService {
 
   searchCitiesByName(locationName: string): Observable<LocationSuggestion[]> {
     const options = new HttpParams({
-      fromObject: {
-        q: locationName
-      }
+      fromObject: { q: locationName }
     });
     const url = `${environment.baseUrl}/cities`;
 
