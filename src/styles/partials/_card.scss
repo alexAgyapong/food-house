@@ -26,9 +26,11 @@
   @include breakpoint(laptop) {
     @media screen {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap:1rem;
-      padding: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+      gap: 1rem;
+      padding: 1.5rem;
+      width: 90vw;
+      margin: 0 auto;
     }
   }
 }
@@ -42,9 +44,7 @@
   margin-bottom: 1rem;
   @include breakpoint(laptop) {
     @media screen {
-      // @include displayFlex(row, flex-start);
-      // margin: 1rem;
-      width: 300px;
+      width: 25vw;
     }
   }
 }
