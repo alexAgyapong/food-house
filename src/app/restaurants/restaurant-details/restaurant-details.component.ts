@@ -14,7 +14,7 @@ import { Location } from '@angular/common';
 export class RestaurantDetailsComponent implements OnInit {
   restaurantId: number;
   restaurant$: Observable<Restaurant>;
-
+  rating = 0;
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
@@ -26,8 +26,7 @@ export class RestaurantDetailsComponent implements OnInit {
     // } as unknown as RequestOption;
     this.restaurant$ = this.restaurantService.getRestaurantDetailsById(this.restaurantId)
       .pipe(
-        // map((x => x.restaurant)),
-        tap(data => console.log('res details', data))
+        tap(data => this.rating = +data.user_rating.aggregate_rating)
       );
   }
 

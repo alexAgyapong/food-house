@@ -8,6 +8,13 @@ $light-gray: hsl(0, 0, 90%);
   align-items: $align-items;
 }
 
+@mixin displayGrid() {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: .5rem;
+  font-size: .8rem;
+}
+
 //Breakpoints
 @mixin breakpoint($point) {
   @if $point == desktop {

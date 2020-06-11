@@ -5,14 +5,19 @@
 .border-transparent {
   border: 1px solid white;
 }
-.bg-gray{
+.bg-gray {
   background-color: $light-gray;
 }
 
-.text-black{
+//text colors
+.text-black {
   color: black;
 }
+.text-coral {
+  color: $coral;
+}
 
+//widths
 .w-40 {
   width: 40% !important;
 }
@@ -23,21 +28,21 @@
   width: 20% !important;
 }
 .w-sm-40 {
-  @include breakpoint(laptop){
+  @include breakpoint(laptop) {
     @media screen {
       width: 40% !important;
     }
   }
 }
 .w-sm-30 {
-  @include breakpoint(laptop){
+  @include breakpoint(laptop) {
     @media screen {
       width: 30% !important;
     }
   }
 }
 .w-sm-20 {
-  @include breakpoint(laptop){
+  @include breakpoint(laptop) {
     @media screen {
       width: 20% !important;
     }
