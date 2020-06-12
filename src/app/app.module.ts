@@ -1,19 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CustomHttpInterceptor } from './custom-http-interceptor';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
 import { RestaurantListComponent } from './restaurants/restaurant-list/restaurant-list.component';
 
 // Libraries
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { RatingModule } from 'ngx-bootstrap/rating';
+import { RatingModule } from 'ng-starrating';
+
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbTypeaheadModule,
-    RatingModule.forRoot()
+    RatingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }

@@ -10,7 +10,7 @@
             <h5 class="card-title font-weight-bold mt-2 pt-2">{{rest?.name}}</h5>
             <p class="card-text">{{rest?.cuisines}}</p>
             <p class="card-text d-flex justify-content-between align-items-center">
-              <star-rating [value]="rest?.user_rating?.aggregate_rating" totalstars="5" checkedcolor="red"
+              <star-rating [value]="rest?.user_rating?.aggregate_rating" [totalstars]="5" checkedcolor="red"
                 uncheckedcolor="black" size="24px" readonly="true"></star-rating>
               <span class="px-1">{{rest?.user_rating?.aggregate_rating}}</span>
               <span>({{rest?.user_rating?.votes}})</span>
