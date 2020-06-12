@@ -14,6 +14,7 @@ import { RestaurantListComponent } from './restaurants/restaurant-list/restauran
 // Libraries
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingModule } from 'ng-starrating';
+import { TimingsComponent } from './shared/components/timings/timings.component';
 
 
 
@@ -22,7 +23,8 @@ import { RatingModule } from 'ng-starrating';
     AppComponent,
     HomeComponent,
     RestaurantDetailsComponent,
-    RestaurantListComponent
+    RestaurantListComponent,
+    TimingsComponent
   ],
   imports: [
     BrowserModule,
