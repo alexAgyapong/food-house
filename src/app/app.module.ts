@@ -8,12 +8,12 @@ import { HomeComponent } from './home/home.component';
 import { CustomHttpInterceptor } from './custom-http-interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
+import { RestaurantListComponent } from './restaurants/restaurant-list/restaurant-list.component';
 
 // Libraries
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingModule } from 'ngx-bootstrap/rating';
-import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
-import { RestaurantListComponent } from './restaurants/restaurant-list/restaurant-list.component';
 
 
 @NgModule({

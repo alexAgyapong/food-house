@@ -6,65 +6,64 @@
   <div class="bg-gray">
     <div class="cards">
       <div *ngIf="restaurant$|async as rest">
-        <a [routerLink]="['/restaurant', 'details',rest?.id]">
-          <div class="card-item text-black bg-white border border-gray rounded">
-            <img [src]="rest?.featured_image" class="card-img-top card-image" alt="Featured Image">
-            <div class="card-content ml-3">
-              <h5 class="card-title font-weight-bold mt-2 pt-2">{{rest?.name}}</h5>
-              <p class="card-text">{{rest?.cuisines}}</p>
-              <p class="card-text d-flex justify-content-between align-items-center">
-                <!-- <star-rating [value]="rest?.user_rating?.aggregate_rating" totalstars="5" checkedcolor="red"
-                  uncheckedcolor="black" size="24px" readonly="true"></star-rating> -->
-                <rating [(ngModel)]="rating" [max]="5" [readonly]="true">
-                </rating>
-                <span class="px-1">{{rest?.user_rating?.aggregate_rating}}</span>
-                <span>({{rest?.user_rating?.votes}})</span>
-              </p>
-              <p class="card-text">{{rest?.location?.locality}}</p>
-              <div class="card-footer-content my-3">
-                <!-- <span><img [src]="rest?.thumb" alt=""></span> -->
-                <a *ngIf="rest?.is_table_reservation_supported" class="btn btn-submit mr-2" href="#">Reserve</a>
-                <a *ngIf="rest?.has_online_delivery" class="btn btn-submit" href="#">Order online</a>
-              </div>
+        <div class="card-item text-black bg-white border border-gray rounded">
+          <div class="card-content">
+            <h5 class="card-title font-weight-bold mt-2 pt-2 ml-3">{{rest?.name}}</h5>
+            <p class="card-text ml-3">{{rest?.cuisines}}</p>
+            <p class="card-text d-flex justify-content-between align-items-center ml-3">
+              <rating [(ngModel)]="rating" [max]="5" [readonly]="true"></rating>
+              <span class="px-1">{{rest?.user_rating?.aggregate_rating}}</span>
+              <span>({{rest?.user_rating?.votes}})</span>
+            </p>
+            <p class="card-text ml-3">{{rest?.location?.locality}}</p>
+            <a id="img-container" class="mt-3" (click)="seePhotos(rest.photos_url)"> <img [src]="rest?.featured_image"
+                class=" all-photos-img card-image" alt="Featured Image">
+                <span id="photos-count" class="d-flex align-items-center text-white my-2 py-2 ml-3"><ion-icon class="mr-2" name="camera-outline"></ion-icon>All photos ({{rest?.photo_count}})</span>
+            </a>
+            <div class="card-footer-content my-3 ml-3">
+              <!-- <span><img [src]="rest?.thumb" alt=""></span> -->
+              <a *ngIf="rest?.is_table_reservation_supported" class="btn btn-submit mr-2" href="#">Reserve</a>
+              <a *ngIf="rest?.has_online_delivery" class="btn btn-submit" href="#">Order online</a>
             </div>
           </div>
-          <div class="card-item text-black bg-white">
-            <section class="card-content ml-3">
-              <h5 class="pt-3">Details</h5>
-              <div>
-                <p class="text-uppercase">Average cost</p>
-                <p>{{rest?.currency}}{{rest?.average_cost_for_two}} for two people (approx)</p>
-                <p class="text-uppercase pt-2">Cuisine</p>
-                <p>{{rest?.cuisines}}</p>
+        </div>
+        <div class="card-item text-black bg-white">
+          <section class="card-content ml-3">
+            <h5 class="pt-3">Details</h5>
+            <div>
+              <p class="text-uppercase">Average cost</p>
+              <p>{{rest?.currency}}{{rest?.average_cost_for_two}} for two people (approx)</p>
+              <p class="text-uppercase pt-2">Cuisine</p>
+              <p>{{rest?.cuisines}}</p>
+            </div>
+            <div class="my-2" *ngIf="rest?.highlights && rest?.highlights?.length">
+              <h5>Highlights</h5>
+              <div class="grid">
+                <span *ngFor="let item of rest?.highlights"><i
+                    class="far fa-check-circle text-success mr-2"></i>{{item}}
+                </span>
               </div>
-              <div class="my-2" *ngIf="rest?.highlights && rest?.highlights?.length">
-                <h5 class="text-uppercase">Highlights</h5>
-                <div class="grid">
-                  <span *ngFor="let item of rest?.highlights"><i class="far fa-check-circle text-success mr-2"></i>{{item}}
-                  </span>
-                </div>
+            </div>
+          </section>
+        </div>
+        <div class="card-item text-black bg-white">
+          <section class="card-content ml-3">
+            <h5 class="pt-3">Location and contact</h5>
+            <div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317718.69319292053!2d-0.3817765050863085!3d51.528307984912544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon!5e0!3m2!1sen!2suk!4v1591823871653!5m2!1sen!2suk"
+                width="330" height="240" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                tabindex="0"></iframe>
+              <!-- <p>{{rest?.currency}}{{rest?.average_cost_for_two}} for two people (approx)</p>
+              <p class="text-uppercase">Cuisine</p>
+              <p>{{rest?.cuisines}}</p> -->
+              <div class="mt-3"><i class="fas fa-map-marker-alt mr-2"></i><span>{{rest?.location?.address}}</span>
               </div>
-            </section>
-          </div>
-          <div class="card-item text-black bg-white">
-            <section class="card-content ml-3">
-              <h5 class="pt-3">Location and contact</h5>
-              <div>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317718.69319292053!2d-0.3817765050863085!3d51.528307984912544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon!5e0!3m2!1sen!2suk!4v1591823871653!5m2!1sen!2suk"
-                  width="330" height="240" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                  tabindex="0"></iframe>
-                <!-- <p>{{rest?.currency}}{{rest?.average_cost_for_two}} for two people (approx)</p>
-                <p class="text-uppercase">Cuisine</p>
-                <p>{{rest?.cuisines}}</p> -->
-                <div class="mt-3"><i class="fas fa-map-marker-alt mr-2"></i><span>{{rest?.location?.address}}</span>
-                </div>
-                <p class="mt-2"><i class="far fa-building mr-2"></i><span>22 miles from Big Ben</span></p>
-                <!-- <a class="mt-2" [href]="rest?.url" target="_blank"><i class="fas fa-laptop mr-2"></i><span>Website</span></a> -->
-              </div>
-            </section>
-          </div>
-        </a>
+              <p class="mt-2"><i class="far fa-building mr-2"></i><span>22 miles from Big Ben</span></p>
+              <!-- <a class="mt-2" [href]="rest?.url" target="_blank"><i class="fas fa-laptop mr-2"></i><span>Website</span></a> -->
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   </div>

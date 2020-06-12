@@ -33,4 +33,10 @@ export class RestaurantDetailsComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  seePhotos(url: string) {
+    if (url !== '' || url !== undefined) {
+      window.open(url, '_blank');
+    }
+  }
 }
