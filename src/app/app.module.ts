@@ -16,6 +16,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingModule } from 'ng-starrating';
 import { TimingsComponent } from './shared/components/timings/timings.component';
 import { ReviewsComponent } from './shared/components/reviews/reviews.component';
+import { SharedRestaurantListComponent } from './shared/components/shared-restaurant-list/shared-restaurant-list.component';
 
 
 
@@ -26,7 +27,8 @@ import { ReviewsComponent } from './shared/components/reviews/reviews.component'
     RestaurantDetailsComponent,
     RestaurantListComponent,
     TimingsComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    SharedRestaurantListComponent
   ],
   imports: [
     BrowserModule,

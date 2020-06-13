@@ -1,0 +1,27 @@
+<section class="bg-white">
+  <h5 class="p-3">Nearby restaurants</h5>
+ <div class="hs">
+    <div *ngFor="let rest of nearbyRestaurants">
+      <a [routerLink]="['/restaurant', 'details',rest?.id]"  class="card-item m-3 text-black bg-white border border-gray rounded">
+        <img [src]="rest?.featured_image" class="card-img-top card-image" alt="Featured Image">
+        <div class="card-content ml-3">
+          <h5 class="card-title font-weight-bold mt-2 pt-2">{{rest?.name}}</h5>
+          <p class="card-text">{{rest?.cuisines}}</p>
+          <p class="card-text d-flex justify-content-between align-items-center">
+            <!-- <star-rating [value]="rest?.user_rating?.aggregate_rating" [totalstars]="5" checkedcolor="red"
+              uncheckedcolor="black" size="24px" readonly="true"></star-rating> -->
+            <span class="px-1">{{rest?.user_rating?.aggregate_rating}}</span>
+            <span>({{rest?.user_rating?.votes}})</span>
+          </p>
+          <p class="card-text">{{rest?.location?.locality}}</p>
+          <div class="card-footer-content my-3">
+            <!-- <span><img [src]="rest?.thumb" alt=""></span> -->
+            <a *ngIf="rest?.is_table_reservation_supported" class="btn btn-submit mr-2" href="#">Reserve</a>
+            <a *ngIf="rest?.has_online_delivery" class="btn btn-submit"
+              href="#">Order online</a>
+          </div>
+        </div>
+      </a>
+    </div>
+ </div>
+</section>

@@ -12,9 +12,9 @@ $light-gray: hsl(0, 0, 90%);
   align-items: $align-items;
 }
 
-@mixin displayGrid() {
+@mixin displayGrid($columns:2) {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat($columns, 1fr);
   gap: 0.5rem;
   font-size: 0.8rem;
 }

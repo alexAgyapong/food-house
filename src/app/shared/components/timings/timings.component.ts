@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { formatDistance, subDays, isWeekend, isSaturday, setHours, setSeconds } from 'date-fns';
 
 @Component({
@@ -6,7 +6,7 @@ import { formatDistance, subDays, isWeekend, isSaturday, setHours, setSeconds } 
   templateUrl: './timings.component.html',
   styleUrls: ['./timings.component.scss']
 })
-export class TimingsComponent implements OnInit {
+export class TimingsComponent implements OnInit, OnChanges {
   @Input() timings: any;
   allTimings: string[] = [];
   todaysTimings: string;
@@ -16,6 +16,13 @@ export class TimingsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(): void {
+    this.setTimings();
+  }
+
+  private setTimings() {
     this.allTimings = this.timings.split(',');
 
     if (isWeekend(this.todaysDate)) {
@@ -37,5 +44,6 @@ export class TimingsComponent implements OnInit {
       // console.log('%c start date', 'color:blue', startDate);
     }
   }
+
 
 }

@@ -1,3 +1,18 @@
 .grid{
   @include displayGrid();
 }
+.grid-horizontal{
+  @include displayGrid(10);
+}
+
+.hs{
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  .card-item{
+    width: 300px;
+    margin-right: 10px;
+  }
+}

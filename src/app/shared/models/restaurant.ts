@@ -198,6 +198,9 @@ export interface Restaurant {
 export interface BestRatedRestaurant {
   restaurant: Restaurant;
 }
+export interface NearbyRestaurant {
+  restaurant: Restaurant;
+}
 export interface FilteredRestaurant {
   restaurant: Restaurant;
 }

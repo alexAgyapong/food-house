@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';
-import { Restaurant, BestRatedRestaurantResult, RequestOption, FilteredRestaurant, Review } from '../models/restaurant';
+import { Restaurant, BestRatedRestaurantResult, RequestOption, FilteredRestaurant, Review, NearbyRestaurant } from '../models/restaurant';
 import { tap, map } from 'rxjs/operators';
 import { LocationResult } from '../models/location';
 import { LocationSuggestion } from './../models/location';
@@ -76,6 +76,17 @@ export class RestaurantService {
       );
   }
 
+  getNearbyRestaurants(lat: string, lon: string): Observable<NearbyRestaurant[]> {
+    const options = new HttpParams({ fromObject: { lat, lon } });
+    const url = `${environment.baseUrl}/geocode`;
+
+    return this.http.get<any>(url, { params: options })
+      .pipe(
+        map(res => res.nearby_restaurants),
+        tap(data => console.log('geocoded', data))
+      );
+  }
+
   searchCitiesByName(locationName: string): Observable<LocationSuggestion[]> {
     const options = new HttpParams({ fromObject: { q: locationName } });
     const url = `${environment.baseUrl}/cities`;
@@ -90,7 +101,7 @@ export class RestaurantService {
   getReviews(id: number): Observable<UserReview[]> {
     const options = new HttpParams({ fromObject: { res_id: id.toString() } });
     const url = `${environment.baseUrl}/reviews`;
-    console.log('review ids', id)
+    console.log('review ids', id);
     return this.http.get<ReviewResult>(url, { params: options })
       .pipe(map(res => res.user_reviews));
   }
