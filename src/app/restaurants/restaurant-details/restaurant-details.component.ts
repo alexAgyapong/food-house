@@ -5,6 +5,7 @@ import { RequestOption, Restaurant, FilteredRestaurant } from 'src/app/shared/mo
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
+import { UserReview, Review } from 'src/app/shared/models/review';
 
 @Component({
   selector: 'app-restaurant-details',
@@ -14,7 +15,8 @@ import { Location } from '@angular/common';
 export class RestaurantDetailsComponent implements OnInit {
   restaurantId: number;
   restaurant$: Observable<Restaurant>;
-  rating = 0;
+  reviews$: Observable<Review[]>;
+  // reviews$: Observable<UserReview[]>;
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
@@ -24,9 +26,11 @@ export class RestaurantDetailsComponent implements OnInit {
     //   entity_type: 'city',
     //   query: this.searchTerm
     // } as unknown as RequestOption;
-    this.restaurant$ = this.restaurantService.getRestaurantDetailsById(this.restaurantId)
+    this.restaurant$ = this.restaurantService.getRestaurantDetailsById(this.restaurantId);
+    this.reviews$ = this.restaurantService.getReviews(this.restaurantId)
       .pipe(
-        tap(data => this.rating = +data.user_rating.aggregate_rating)
+        map(res => res.map(x => x.review)),
+        tap(data => console.log('reviews', data))
       );
   }
 

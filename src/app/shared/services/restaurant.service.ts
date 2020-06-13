@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';
-import { Restaurant, BestRatedRestaurantResult, RequestOption, FilteredRestaurant } from '../models/restaurant';
+import { Restaurant, BestRatedRestaurantResult, RequestOption, FilteredRestaurant, Review } from '../models/restaurant';
 import { tap, map } from 'rxjs/operators';
 import { LocationResult } from '../models/location';
 import { LocationSuggestion } from './../models/location';
 import { Category, CategoriesResult } from './../models/category';
 import { BestRatedRestaurant, Result } from './../models/restaurant';
+import { ReviewResult } from '../models/review';
+import { url } from 'inspector';
+import { UserReview } from './../models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -74,9 +77,7 @@ export class RestaurantService {
   }
 
   searchCitiesByName(locationName: string): Observable<LocationSuggestion[]> {
-    const options = new HttpParams({
-      fromObject: { q: locationName }
-    });
+    const options = new HttpParams({ fromObject: { q: locationName } });
     const url = `${environment.baseUrl}/cities`;
 
     return this.http.get<LocationResult>(url, { params: options })
@@ -84,5 +85,13 @@ export class RestaurantService {
         map(res => res.location_suggestions),
         tap(data => console.log('search res', data))
       );
+  }
+
+  getReviews(id: number): Observable<UserReview[]> {
+    const options = new HttpParams({ fromObject: { res_id: id.toString() } });
+    const url = `${environment.baseUrl}/reviews`;
+    console.log('review ids', id)
+    return this.http.get<ReviewResult>(url, { params: options })
+      .pipe(map(res => res.user_reviews));
   }
 }

@@ -22,8 +22,13 @@
                 class=" all-photos-img card-image" alt="Featured Image">
                 <span id="photos-count" class="d-flex align-items-center text-white my-2 py-2 ml-3"><ion-icon class="mr-2" name="camera-outline"></ion-icon>All photos ({{rest?.photo_count}})</span>
             </a>
-            <div class="card-footer-content my-3 ml-3">
-              <!-- <span><img [src]="rest?.thumb" alt=""></span> -->
+            <article class="d-flex justify-content-center mx-3 mt-2">
+              <div class="text-center px-3"><ion-icon name="call-outline"></ion-icon><p>Call</p></div>
+              <div class="text-center mx-2 px-3"><ion-icon name="location-sharp"></ion-icon><p>Map</p></div>
+              <div class="text-center mx-2 px-3"><i class="fas fa-utensils"></i><p>Menu</p></div>
+              <div class="text-center px-3"><i class="fas fa-laptop"></i><p>Website</p></div>
+            </article>
+            <div class="d-flex justify-content-around my-3 ml-3 px-3">
               <a *ngIf="rest?.is_table_reservation_supported" class="btn btn-submit mr-2" href="#">Reserve</a>
               <a *ngIf="rest?.has_online_delivery" class="btn btn-submit" href="#">Order online</a>
             </div>
@@ -66,6 +71,10 @@
             </div>
           </section>
         </div>
+        <!-- <section>
+          {{reviews$|async|json}}
+        </section> -->
+        <app-reviews [reviews]="reviews$|async"></app-reviews>
       </div>
     </div>
   </div>
