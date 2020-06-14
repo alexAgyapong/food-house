@@ -25,20 +25,20 @@
               </span>
             </a>
             <article class="d-flex justify-content-center mx-3 mt-2">
-              <div class="text-center px-3">
+              <a href="tel:+rest?.phone_numbers[0]" class="text-center px-3">
                 <ion-icon name="call-outline"></ion-icon>
                 <p>Call</p>
-              </div>
-              <div class="text-center mx-2 px-3">
+              </a>
+              <a [href]="rest?.url" class="text-center mx-2 px-3">
                 <ion-icon name="location-sharp"></ion-icon>
                 <p>Map</p>
-              </div>
-              <div class="text-center mx-2 px-3"><i class="fas fa-utensils"></i>
+              </a>
+              <a [href]="rest?.menu_url" target="_blank" class="text-center mx-2 px-3"><i class="fas fa-utensils"></i>
                 <p>Menu</p>
-              </div>
-              <div class="text-center px-3"><i class="fas fa-laptop"></i>
+              </a>
+              <a [href]="rest?.url" target="_blank"  class="text-center px-3"><i class="fas fa-laptop"></i>
                 <p>Website</p>
-              </div>
+              </a>
             </article>
             <div class="d-flex justify-content-around my-3 ml-3 px-3">
               <a *ngIf="rest?.is_table_reservation_supported" class="btn btn-submit mr-2" href="#">Reserve</a>
