@@ -29,7 +29,9 @@ export class TimingsComponent implements OnInit, OnChanges {
       if (isSaturday(this.todaysDate)) {
         this.todaysTimings = this.allTimings[1].replace('to', '-');
       } else {
-        this.todaysTimings = this.allTimings[2].replace('to', '-');
+        if (this.allTimings.length > 2) {
+          this.todaysTimings = this.allTimings[2].replace('to', '-');
+        } else { this.todaysTimings = this.allTimings[1].replace('to', '-'); }
       }
       console.log('weekend', this.todaysDate);
     } else {

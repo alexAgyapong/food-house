@@ -10,13 +10,14 @@ import { HomeComponent } from './home/home.component';
 import { CustomHttpInterceptor } from './custom-http-interceptor';
 import { RestaurantDetailsComponent } from './restaurants/restaurant-details/restaurant-details.component';
 import { RestaurantListComponent } from './restaurants/restaurant-list/restaurant-list.component';
+import { TimingsComponent } from './shared/components/timings/timings.component';
+import { ReviewsComponent } from './shared/components/reviews/reviews.component';
+import { SharedRestaurantListComponent } from './shared/components/shared-restaurant-list/shared-restaurant-list.component';
 
 // Libraries
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingModule } from 'ng-starrating';
-import { TimingsComponent } from './shared/components/timings/timings.component';
-import { ReviewsComponent } from './shared/components/reviews/reviews.component';
-import { SharedRestaurantListComponent } from './shared/components/shared-restaurant-list/shared-restaurant-list.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -38,7 +39,8 @@ import { SharedRestaurantListComponent } from './shared/components/shared-restau
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbTypeaheadModule,
-    RatingModule
+    RatingModule,
+    ModalModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }

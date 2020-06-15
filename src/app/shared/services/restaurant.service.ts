@@ -9,7 +9,6 @@ import { LocationSuggestion } from './../models/location';
 import { Category, CategoriesResult } from './../models/category';
 import { BestRatedRestaurant, Result } from './../models/restaurant';
 import { ReviewResult } from '../models/review';
-import { url } from 'inspector';
 import { UserReview } from './../models/review';
 
 @Injectable({
@@ -83,7 +82,7 @@ export class RestaurantService {
     return this.http.get<any>(url, { params: options })
       .pipe(
         map(res => res.nearby_restaurants),
-        tap(data => console.log('geocoded', data))
+        tap(data => localStorage.setItem('nearbyRestaurants', JSON.stringify(data)))
       );
   }
 
@@ -101,7 +100,7 @@ export class RestaurantService {
   getReviews(id: number): Observable<UserReview[]> {
     const options = new HttpParams({ fromObject: { res_id: id.toString() } });
     const url = `${environment.baseUrl}/reviews`;
-    console.log('review ids', id);
+
     return this.http.get<ReviewResult>(url, { params: options })
       .pipe(map(res => res.user_reviews));
   }
