@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from 'src/app/shared/services/restaurant.service';
 import { ActivatedRoute } from '@angular/router';
-import { RequestOption, Restaurant, FilteredRestaurant, Location, NearbyRestaurant } from 'src/app/shared/models/restaurant';
+import { Restaurant, Location, NearbyRestaurant } from 'src/app/shared/models/restaurant';
 import { map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { UserReview, Review } from 'src/app/shared/models/review';
+import { Observable, of } from 'rxjs';
+import { Review } from 'src/app/shared/models/review';
 import { SharedService } from './../../shared/services/shared.service';
 
 @Component({
@@ -18,10 +18,11 @@ export class RestaurantDetailsComponent implements OnInit {
   reviews$: Observable<Review[]>;
   restaurantLocation: Location;
   nearbyRestaurants$: Observable<Restaurant[]>;
+  title = 'Nearby restaurants';
 
   constructor(private restaurantService: RestaurantService,
-    private route: ActivatedRoute,
-    private sharedService: SharedService,
+              private route: ActivatedRoute,
+              private sharedService: SharedService,
   ) { }
 
   ngOnInit(): void {
@@ -52,15 +53,29 @@ export class RestaurantDetailsComponent implements OnInit {
   }
 
   private getNearbyRestaurants(lat: string, lon: string) {
-    this.nearbyRestaurants$ = this.restaurantService.getNearbyRestaurants(lat, lon)
-      .pipe(
-        map(res => res.map(x => x.restaurant)),
-        tap(data => console.log('nearby', data))
-      );
+    if (localStorage.getItem('nearbyRestaurants')) {
+      console.log('nearby', localStorage.getItem('nearbyRestaurants'));
+      const restaurants = JSON.parse(localStorage.getItem('nearbyRestaurants')) as NearbyRestaurant[];
+      console.log('nearby object', restaurants);
+      this.nearbyRestaurants$ = of(restaurants.map(x => x.restaurant));
+    } else {
+      this.nearbyRestaurants$ = this.restaurantService.getNearbyRestaurants(lat, lon)
+        .pipe(
+          map(res => res.map(x => x.restaurant)),
+          tap(data => console.log('nearby', data))
+        );
+    }
   }
 
   goBack() {
+    this.removeStorageItem();
     this.sharedService.back();
+  }
+
+  private removeStorageItem() {
+    if (localStorage.getItem('nearbyRestaurants')) {
+      localStorage.removeItem('nearbyRestaurants');
+    }
   }
 
   seePhotos(url: string) {
