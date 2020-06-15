@@ -19,6 +19,7 @@ export class RestaurantDetailsComponent implements OnInit {
   restaurantLocation: Location;
   nearbyRestaurants$: Observable<Restaurant[]>;
   title = 'Nearby restaurants';
+  city: string;
 
   constructor(private restaurantService: RestaurantService,
               private route: ActivatedRoute,
@@ -27,10 +28,12 @@ export class RestaurantDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.restaurantId = +this.route.snapshot.paramMap.get('id');
+    this.city = this.route.snapshot.queryParamMap.get('city');
+    console.log('city', this.city);
     this.route.paramMap.subscribe(param => {
       this.restaurantId = +param.get('id');
       this.getRestaurantDetails();
-      // this.getRestaurantReviews();
+      this.getRestaurantReviews();
     });
   }
 

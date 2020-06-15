@@ -7,6 +7,7 @@ import { LocationSuggestion } from '../shared/models/location';
 import { Category, CategoryEnum } from './../shared/models/category';
 import StringUtility from './../shared/string-utility';
 import { BestRatedRestaurant, Restaurant } from '../shared/models/restaurant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,8 +23,10 @@ export class HomeComponent implements OnInit {
   suggestions: (searchTerm$: Observable<string>) => Observable<LocationSuggestion[]>;
   selectedCategories: Category[];
   topRatedRestaurants$ = new Observable<Restaurant[]>();
+  city: string;
+  searchTerm: string;
 
-  constructor(private fb: FormBuilder, private restaurantService: RestaurantService) { }
+  constructor(private fb: FormBuilder, private router: Router, private restaurantService: RestaurantService) { }
 
   ngOnInit() {
     this.searchForm = this.fb.group({
@@ -40,7 +43,7 @@ export class HomeComponent implements OnInit {
     // this.getCategories();
     this.suggestions = (searchTerm$: Observable<string>) => searchTerm$
       .pipe(
-        debounceTime(100),
+        debounceTime(500),
         distinctUntilChanged(),
         switchMap(term => this.restaurantService.searchCitiesByName(term)),
         tap(data => console.log('res from suggetions', data))
@@ -73,12 +76,20 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
-    console.log('search');
+    this.router.navigate(['/restaurant'], {
+      queryParams:
+      {
+        city: this.city ?? '',
+        cityId: this.cityId ?? 0,
+        searchTerm: this.searchForm.get('restaurant').value || ''
+      }
+    });
   }
 
   onLocationSelected(selected: any) {
     if (selected && selected.item) {
       this.cityId = selected.item.id;
+      this.city = selected.item.name;
       console.log('selected', selected.item.id);
     }
   }

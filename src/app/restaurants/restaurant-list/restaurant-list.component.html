@@ -1,10 +1,10 @@
 <section>
-  <h3 class="text-center">Restaurants in 'LOCATION'</h3>
+  <h5 class="text-center p-3">Restaurants in {{city}}</h5>
   <div class="bg-gray">
     <div>Filters here...</div>
     <div class="cards">
       <div *ngFor="let rest of restaurants$|async">
-        <a [routerLink]="['/restaurant', 'details',rest?.id]"  class="card-item text-black bg-white border border-gray rounded">
+        <a [routerLink]="['/restaurant', 'details',rest?.id]" [queryParams] ="{city:rest?.location?.city}" class="card-item text-black bg-white border border-gray rounded">
           <img [src]="rest?.featured_image" class="card-img-top card-image" alt="Featured Image">
           <div class="card-content ml-3">
             <h5 class="card-title font-weight-bold mt-2 pt-2">{{rest?.name}}</h5>

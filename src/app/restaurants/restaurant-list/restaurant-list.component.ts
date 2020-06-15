@@ -15,15 +15,18 @@ export class RestaurantListComponent implements OnInit {
   searchLocation: string;
   searchTerm: string;
   restaurants$: Observable<Restaurant[]>;
+  city: string;
+  cityId: number;
   // restaurants$ = new Observable<FilteredRestaurant[]>();
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.searchLocation = this.route.snapshot.paramMap.get('location');
-    this.searchTerm = this.route.snapshot.paramMap.get('searchTerm');
+    this.city = this.route.snapshot.queryParamMap.get('city');
+    this.cityId = +this.route.snapshot.queryParamMap.get('cityId');
+    this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
     const request = {
-      entity_id: this.searchLocation ?? 61,
+      entity_id: this.cityId ?? 61,
       entity_type: 'city',
       query: this.searchTerm
     } as unknown as RequestOption;
