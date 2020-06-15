@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { formatDistance, subDays, isWeekend, isSaturday, setHours, setSeconds } from 'date-fns';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalComponent } from './../modal/modal.component';
 
 @Component({
   selector: 'app-timings',
@@ -13,7 +15,8 @@ export class TimingsComponent implements OnInit, OnChanges {
   todaysDate = new Date();
   isOpen = false;
   currentTime = this.todaysDate.getTime();
-  constructor() { }
+  modalRef: BsModalRef;
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit(): void {
   }
@@ -47,5 +50,13 @@ export class TimingsComponent implements OnInit, OnChanges {
     }
   }
 
+  viewAllTimings() {
+    const initialState = {
+      list: [...this.allTimings],
+      title: 'Hours'
+    };
+    this.modalRef = this.modalService.show(ModalComponent, { initialState });
+    this.modalRef.content.closeBtnName = 'Close';
+  }
 
 }

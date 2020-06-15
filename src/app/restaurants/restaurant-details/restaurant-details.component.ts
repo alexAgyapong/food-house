@@ -30,7 +30,7 @@ export class RestaurantDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(param => {
       this.restaurantId = +param.get('id');
       this.getRestaurantDetails();
-      this.getRestaurantReviews();
+      // this.getRestaurantReviews();
     });
   }
 

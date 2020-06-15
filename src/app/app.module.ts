@@ -18,6 +18,7 @@ import { SharedRestaurantListComponent } from './shared/components/shared-restau
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingModule } from 'ng-starrating';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 
 
@@ -29,7 +30,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     RestaurantListComponent,
     TimingsComponent,
     ReviewsComponent,
-    SharedRestaurantListComponent
+    SharedRestaurantListComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
