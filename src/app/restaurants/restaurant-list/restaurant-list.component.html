@@ -1,7 +1,8 @@
 <section>
   <h5 class="text-center p-3">Restaurants in {{city}}</h5>
   <div class="bg-gray">
-    <div>Filters here...</div>
+    <app-filter [categories]="categories$|async" [establishmentTypes]="establishmentTypes$|async"
+      [cuisines]="cuisines$|async"></app-filter>
     <div class="cards">
       <div *ngFor="let rest of restaurants$|async">
         <a [routerLink]="['/restaurant', 'details',rest?.id]" [queryParams]="{city:rest?.location?.city}"
@@ -26,8 +27,8 @@
         </a>
       </div>
       <div *ngIf="totalItems" class="mt-3 p-3 bg-white">
-        <pagination class="text-white" [totalItems]="totalItems" [itemsPerPage]="pageSize" [rotate]="rotate" [maxSize]="maxSize"
-          (pageChanged)="onPageChange($event)"></pagination>
+        <pagination class="text-white" [totalItems]="totalItems" [itemsPerPage]="pageSize" [rotate]="rotate"
+          [maxSize]="maxSize" (pageChanged)="onPageChange($event)"></pagination>
       </div>
     </div>
   </div>

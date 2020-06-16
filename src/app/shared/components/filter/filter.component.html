@@ -1,0 +1,14 @@
+<div>
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="types" *ngFor="let type of filterForm.controls.types.controls; let i=index">
+      <label class="ml-3">
+        <input type="checkbox" [formControlName]="i">
+        {{establishmentTypes[i]?.establishment?.name}}
+      </label>
+      <!-- <div class="custom-control custom-checkbox ml-3">
+        <input type="checkbox" class="custom-control-input" [id]="i" [formControlName]="i">
+        <label class="custom-control-label" for="i">{{establishmentTypes[i]?.establishment?.name}}</label>
+      </div> -->
+    </div>
+  </form>
+</div>

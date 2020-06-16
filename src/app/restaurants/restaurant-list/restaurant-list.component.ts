@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { Restaurant } from 'src/app/shared/models/restaurant';
 import { RequestOption } from './../../shared/models/restaurant';
 import { tap, map } from 'rxjs/operators';
+import { Establishment } from 'src/app/shared/models/establishment';
+import { Cuisine } from 'src/app/shared/models/cuisine';
+import { Category } from 'src/app/shared/models/category';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -21,14 +24,21 @@ export class RestaurantListComponent implements OnInit {
   rotate = false;
   totalItems: number;
   pageSize = 20;
+  establishmentTypes$: Observable<any[]>;
+  cuisines$: Observable<Cuisine[]>;
+  categories$: Observable<Category[]>;
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.city = this.route.snapshot.queryParamMap.get('city') || 'London';
-    this.cityId = +this.route.snapshot.queryParamMap.get('cityId');
+    this.cityId = +this.route.snapshot.queryParamMap.get('cityId') || 61;
     this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
-    this.getRestaurantList();
+    // this.getRestaurantList();
+
+    this.categories$ = this.restaurantService.getCategories();
+    this.establishmentTypes$ = this.restaurantService.getEstablishments(this.cityId);
+    this.cuisines$ = this.restaurantService.getCuisines(this.cityId);
   }
 
   private getRestaurantList(start?: number) {

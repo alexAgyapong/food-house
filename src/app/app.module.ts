@@ -20,6 +20,7 @@ import { RatingModule } from 'ng-starrating';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { FilterComponent } from './shared/components/filter/filter.component';
 
 
 
@@ -32,7 +33,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     TimingsComponent,
     ReviewsComponent,
     SharedRestaurantListComponent,
-    ModalComponent
+    ModalComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
