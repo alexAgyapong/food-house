@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from 'src/app/shared/services/restaurant.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Restaurant, FilteredRestaurant } from 'src/app/shared/models/restaurant';
+import { Restaurant } from 'src/app/shared/models/restaurant';
 import { RequestOption } from './../../shared/models/restaurant';
 import { tap, map } from 'rxjs/operators';
 
@@ -21,12 +21,11 @@ export class RestaurantListComponent implements OnInit {
   rotate = false;
   totalItems: number;
   pageSize = 20;
-  // restaurants$ = new Observable<FilteredRestaurant[]>();
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.city = this.route.snapshot.queryParamMap.get('city');
+    this.city = this.route.snapshot.queryParamMap.get('city') || 'London';
     this.cityId = +this.route.snapshot.queryParamMap.get('cityId');
     this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
     this.getRestaurantList();
@@ -51,7 +50,6 @@ export class RestaurantListComponent implements OnInit {
   onPageChange(event) {
     if (event.page) {
       const start = this.setStartPage(event.page);
-      console.log('event', event.page, 'start', start);
       this.getRestaurantList(start);
     }
   }
