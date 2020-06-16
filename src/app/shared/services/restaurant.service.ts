@@ -10,6 +10,8 @@ import { Category, CategoriesResult } from './../models/category';
 import { BestRatedRestaurant, Result } from './../models/restaurant';
 import { ReviewResult } from '../models/review';
 import { UserReview } from './../models/review';
+import { Establishment, Establishments } from './../models/establishment';
+import { Cuisine } from './../models/cuisine';
 
 @Injectable({
   providedIn: 'root'
@@ -104,5 +106,24 @@ export class RestaurantService {
 
     return this.http.get<ReviewResult>(url, { params: options })
       .pipe(map(res => res.user_reviews));
+  }
+
+  getEstablishments(cityId: number): Observable<Establishment[]> {
+    const options = new HttpParams({ fromObject: { city_id: cityId.toString() } });
+    const url = `${environment.baseUrl}/establishments`;
+
+    return this.http.get<any>(url, { params: options })
+      .pipe(
+        map(res => res.establishments)
+        // map(res => res.establishment)
+      );
+  }
+
+  getCuisines(cityId: number): Observable<Cuisine[]> {
+    const options = new HttpParams({ fromObject: { city_id: cityId.toString() } });
+    const url = `${environment.baseUrl}/cuisines`;
+
+    return this.http.get<any>(url, { params: options })
+      .pipe(map(res => res.cuisines));
   }
 }
