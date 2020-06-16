@@ -224,4 +224,5 @@ export interface RequestOption {
   entity_id: number;
   entity_type: string;
   query: string;
+  start: number;
 }

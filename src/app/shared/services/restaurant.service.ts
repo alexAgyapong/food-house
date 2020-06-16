@@ -28,19 +28,20 @@ export class RestaurantService {
       );
   }
 
-  searchRestuarant(request: RequestOption): Observable<FilteredRestaurant[]> {
+  searchRestuarant(request: RequestOption): Observable<Result> {
     const url = `${environment.baseUrl}/search`;
     const options = new HttpParams({
       fromObject: {
         entity_id: request.entity_id.toString(),
         entity_type: request.entity_type,
-        q: request.query
+        q: request.query,
+        start: request.start ? request.start.toString() : ''
       }
     });
 
     return this.http.get<Result>(url, { params: options })
       .pipe(
-        map(res => res.restaurants),
+        // map(res => res.restaurants),
         tap(data => console.log('search restaurants', data))
       );
   }

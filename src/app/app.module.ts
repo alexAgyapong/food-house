@@ -19,6 +19,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingModule } from 'ng-starrating';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 
@@ -42,7 +43,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     BrowserAnimationsModule,
     NgbTypeaheadModule,
     RatingModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }

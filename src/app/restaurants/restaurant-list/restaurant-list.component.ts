@@ -17,6 +17,10 @@ export class RestaurantListComponent implements OnInit {
   restaurants$: Observable<Restaurant[]>;
   city: string;
   cityId: number;
+  maxSize = 3;
+  rotate = false;
+  totalItems: number;
+  pageSize = 20;
   // restaurants$ = new Observable<FilteredRestaurant[]>();
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
@@ -25,16 +29,35 @@ export class RestaurantListComponent implements OnInit {
     this.city = this.route.snapshot.queryParamMap.get('city');
     this.cityId = +this.route.snapshot.queryParamMap.get('cityId');
     this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
+    this.getRestaurantList();
+  }
+
+  private getRestaurantList(start?: number) {
     const request = {
       entity_id: this.cityId ?? 61,
       entity_type: 'city',
-      query: this.searchTerm
+      query: this.searchTerm,
+      start
     } as unknown as RequestOption;
     this.restaurants$ = this.restaurantService.searchRestuarant(request)
       .pipe(
+        tap(data => this.totalItems = +data.results_found),
+        map(res => res.restaurants),
         map(res => res.map(x => x.restaurant)),
-        tap(data => console.log('res', data))
+        tap(data => console.log('res', data, 'total items', this.totalItems))
       );
+  }
+
+  onPageChange(event) {
+    if (event.page) {
+      const start = this.setStartPage(event.page);
+      console.log('event', event.page, 'start', start);
+      this.getRestaurantList(start);
+    }
+  }
+
+  setStartPage(page: number) {
+    return (20 * (page - 1)) + (page - 1);
   }
 
 }
