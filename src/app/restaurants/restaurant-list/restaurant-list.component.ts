@@ -28,6 +28,9 @@ export class RestaurantListComponent implements OnInit {
   establishmentTypes$: Observable<Establishment[]>;
   cuisines$: Observable<Cuisine[]>;
   categories$: Observable<Categories[]>;
+  category: number[];
+  cuisineIds: number[];
+  establishmentTypeIds: number[];
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
@@ -35,13 +38,13 @@ export class RestaurantListComponent implements OnInit {
     this.city = this.route.snapshot.queryParamMap.get('city') || 'London';
     this.cityId = +this.route.snapshot.queryParamMap.get('cityId') || 61;
     this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
-    // this.getRestaurantList();
+    this.getRestaurantList();
 
     this.categories$ = this.restaurantService.getCategories()
-    .pipe(map(res => res.map(x => x['categories'])));
+      .pipe(map(res => res.map(x => x['categories'])));
 
     this.establishmentTypes$ = this.restaurantService.getEstablishments(this.cityId)
-    .pipe(map(res => res.map(x => x['establishment'])));
+      .pipe(map(res => res.map(x => x['establishment'])));
 
     this.cuisines$ = this.restaurantService.getCuisines(this.cityId)
       .pipe(map(res => res.map(x => x['cuisine'])));
@@ -49,10 +52,13 @@ export class RestaurantListComponent implements OnInit {
 
   private getRestaurantList(start?: number) {
     const request = {
-      entity_id: this.cityId ?? 61,
-      entity_type: 'city',
+      entityId: this.cityId ?? 61,
+      entityType: 'city',
       query: this.searchTerm,
-      start
+      start,
+      category: this.category,
+      establishmentType: this.establishmentTypeIds,
+      cuisines: this.cuisineIds
     } as unknown as RequestOption;
     this.restaurants$ = this.restaurantService.searchRestuarant(request)
       .pipe(
@@ -74,4 +80,18 @@ export class RestaurantListComponent implements OnInit {
     return (20 * (page - 1)) + (page - 1);
   }
 
+  getSelectedCategories(categoryIds: number[]) {
+    this.category = categoryIds;
+    this.getRestaurantList();
+  }
+
+  getSelectedCuisines(cuinsineIds: number[]) {
+    this.cuisineIds = cuinsineIds;
+    this.getRestaurantList();
+  }
+
+  getSelectedEstablishmentTypes(establishmentTypeIds: number[]) {
+    this.establishmentTypeIds = establishmentTypeIds;
+    this.getRestaurantList();
+  }
 }

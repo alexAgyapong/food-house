@@ -2,7 +2,9 @@
   <h5 class="text-center p-3">Restaurants in {{city}}</h5>
   <div class="bg-gray">
     <app-filter [categories]="categories$|async" [establishmentTypes]="establishmentTypes$|async"
-      [cuisines]="cuisines$|async"></app-filter>
+      [cuisines]="cuisines$|async" (selectedCategories)="getSelectedCategories($event)"
+      (selectedCuisines)="getSelectedCuisines($event)"
+      (selectedEstablishmentTypes)="getSelectedEstablishmentTypes($event)"></app-filter>
     <div class="cards">
       <div *ngFor="let rest of restaurants$|async">
         <a [routerLink]="['/restaurant', 'details',rest?.id]" [queryParams]="{city:rest?.location?.city}"

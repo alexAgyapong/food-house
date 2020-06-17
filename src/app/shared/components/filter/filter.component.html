@@ -21,10 +21,11 @@
     <div class="mt-4">
       <div formArrayName="cuisines" *ngFor="let cuisine of cuisinesArray.controls; let i=index">
         <div class="custom-control custom-checkbox ml-3">
-          <input type="checkbox" class="custom-control-input"  id="{{'cuisine'+i}}" [formControlName]="i">
+          <input type="checkbox" class="custom-control-input" id="{{'cuisine'+i}}" [formControlName]="i">
           <label class="custom-control-label" attr.for="{{'cuisine'+i}}"> {{cuisines[i]?.cuisine_name}}</label>
         </div>
       </div>
     </div>
+    <div class="text-center mt-4"> <button type="submit" class="btn btn-secondary w-90">Apply</button></div>
   </form>
 </div>

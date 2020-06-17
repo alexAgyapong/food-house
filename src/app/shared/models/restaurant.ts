@@ -221,8 +221,11 @@ export interface BestRatedRestaurantResult {
 }
 
 export interface RequestOption {
-  entity_id: number;
-  entity_type: string;
+  entityId: number;
+  entityType: string;
   query: string;
   start: number;
+  cuisines: string;
+  category: string;
+  establishmentType: string;
 }

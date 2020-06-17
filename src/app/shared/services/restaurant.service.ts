@@ -34,10 +34,13 @@ export class RestaurantService {
     const url = `${environment.baseUrl}/search`;
     const options = new HttpParams({
       fromObject: {
-        entity_id: request.entity_id.toString(),
-        entity_type: request.entity_type,
+        entity_id: request.entityId.toString(),
+        entity_type: request.entityType,
         q: request.query,
-        start: request.start ? request.start.toString() : ''
+        start: request.start ? request.start.toString() : '',
+        category: request.category,
+        cuisines: request.cuisines,
+        establishment_type: request.establishmentType
       }
     });
 

@@ -14,8 +14,14 @@ export class FilterComponent implements OnInit, OnChanges {
   @Input() establishmentTypes: Establishment[] = [];
   @Input() categories: Categories[] = [];
   @Input() cuisines: Cuisine[] = [];
+  @Output() selectedCategories = new EventEmitter<number[]>();
+  @Output() selectedCuisines = new EventEmitter<number[]>();
+  @Output() selectedEstablishmentTypes = new EventEmitter<number[]>();
   @Output() selectedFilters = new EventEmitter<any>();
   filterForm: FormGroup;
+  categoryIds: number[];
+  cuisineIds: number[];
+  establishmentTypeIds: number[];
 
   get establishmentTypesArray(): FormArray {
     return this.filterForm.get('types') as FormArray;
@@ -38,9 +44,33 @@ export class FilterComponent implements OnInit, OnChanges {
       categories: new FormArray([]),
       cuisines: new FormArray([])
     });
+
     this.addEstablishmentTypes();
     this.addCategories();
     this.addCuisines();
+
+    this.filterForm.valueChanges.subscribe(data => {
+      if (data.categories) {
+        this.categoryIds = this.categoriesArray.controls
+          .map((v, i) => (v.value ? this.categories[i].id : null))
+          .filter(v => v !== null);
+        this.selectedCategories.emit(this.categoryIds);
+      }
+
+      if (data.cuisines) {
+        this.cuisineIds = this.cuisinesArray.controls
+          .map((v, i) => (v.value ? this.cuisines[i].cuisine_id : null))
+          .filter(v => v !== null);
+        this.selectedCuisines.emit(this.cuisineIds);
+      }
+
+      if (data.types) {
+        this.establishmentTypeIds = this.establishmentTypesArray.controls
+          .map((v, i) => (v.value ? this.establishmentTypes[i].id : null))
+          .filter(v => v !== null);
+        this.selectedEstablishmentTypes.emit(this.establishmentTypeIds);
+      }
+    })
   }
 
   addEstablishmentTypes() {
@@ -63,8 +93,6 @@ export class FilterComponent implements OnInit, OnChanges {
 
   addCuisines() {
     if (this.cuisines && this.cuisines.length) {
-      let key = Object.values(this.cuisines);
-      console.log('keys', key)
       this.cuisines.forEach((c, i) => {
         const control = new FormControl(i = 0);
         this.cuisinesArray.push(control);
@@ -73,5 +101,17 @@ export class FilterComponent implements OnInit, OnChanges {
   }
   onSubmit() {
     console.log('submit');
+
+    const output = [];
+    this.categoriesArray.controls.forEach((v, i) => {
+      if (v.value) {
+        output.push(this.categories[i]);
+      }
+    });
+    console.log('output', output);
+    const ids = this.categoriesArray.controls
+      .map((v, i) => (v.value ? this.categories[i] : null))
+      .filter(v => v !== null);
+    console.log('ids', ids)
   }
 }
