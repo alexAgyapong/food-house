@@ -17,6 +17,16 @@ export class FilterComponent implements OnInit, OnChanges {
   @Output() selectedFilters = new EventEmitter<any>();
   filterForm: FormGroup;
 
+  get establishmentTypesArray(): FormArray {
+    return this.filterForm.get('types') as FormArray;
+  }
+  get categoriesArray(): FormArray {
+    return this.filterForm.get('categories') as FormArray;
+  }
+  get cuisinesArray(): FormArray {
+    return this.filterForm.get('cuisines') as FormArray;
+  }
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -24,20 +34,43 @@ export class FilterComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.filterForm = this.fb.group({
-      types: new FormArray([])
+      types: new FormArray([]),
+      categories: new FormArray([]),
+      cuisines: new FormArray([])
     });
-    this.addTypesCheckboxes();
-    console.log('types', this.filterForm.get('types').value);
+    this.addEstablishmentTypes();
+    this.addCategories();
+    this.addCuisines();
   }
-  addTypesCheckboxes() {
+
+  addEstablishmentTypes() {
     if (this.establishmentTypes && this.establishmentTypes.length) {
       this.establishmentTypes.forEach((t, i) => {
         const control = new FormControl(i = 0);
-        (this.filterForm.get('types') as FormArray).push(control);
+        this.establishmentTypesArray.push(control);
       });
     }
   }
 
+  addCategories() {
+    if (this.categories && this.categories.length) {
+      this.categories.forEach((cat, i) => {
+        const control = new FormControl(i = 0);
+        this.categoriesArray.push(control);
+      });
+    }
+  }
+
+  addCuisines() {
+    if (this.cuisines && this.cuisines.length) {
+      let key = Object.values(this.cuisines);
+      console.log('keys', key)
+      this.cuisines.forEach((c, i) => {
+        const control = new FormControl(i = 0);
+        this.cuisinesArray.push(control);
+      });
+    }
+  }
   onSubmit() {
     console.log('submit');
   }

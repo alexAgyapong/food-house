@@ -1,14 +1,30 @@
 <div>
-  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-    <div formArrayName="types" *ngFor="let type of filterForm.controls.types.controls; let i=index">
-      <label class="ml-3">
+  <form [formGroup]="filterForm" class="py-4" (ngSubmit)="onSubmit()">
+    <div formArrayName="types" *ngFor="let type of establishmentTypesArray.controls; let i=index">
+      <!-- <label class="ml-3">
         <input type="checkbox" [formControlName]="i">
         {{establishmentTypes[i]?.establishment?.name}}
-      </label>
-      <!-- <div class="custom-control custom-checkbox ml-3">
-        <input type="checkbox" class="custom-control-input" [id]="i" [formControlName]="i">
-        <label class="custom-control-label" for="i">{{establishmentTypes[i]?.establishment?.name}}</label>
-      </div> -->
+      </label> -->
+      <div class="custom-control custom-checkbox ml-3">
+        <input type="checkbox" class="custom-control-input" id="{{'id'+i}}" [formControlName]="i">
+        <label class="custom-control-label" attr.for="{{'id'+i}}">{{establishmentTypes[i]?.name}}</label>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div formArrayName="categories" *ngFor="let cat of categoriesArray.controls; let i=index">
+        <div class="custom-control custom-checkbox ml-3">
+          <input type="checkbox" class="custom-control-input" id="{{'cat'+i}}" [formControlName]="i">
+          <label class="custom-control-label" attr.for="{{'cat'+i}}">{{categories[i]?.name}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div formArrayName="cuisines" *ngFor="let cuisine of cuisinesArray.controls; let i=index">
+        <div class="custom-control custom-checkbox ml-3">
+          <input type="checkbox" class="custom-control-input"  id="{{'cuisine'+i}}" [formControlName]="i">
+          <label class="custom-control-label" attr.for="{{'cuisine'+i}}"> {{cuisines[i]?.cuisine_name}}</label>
+        </div>
+      </div>
     </div>
   </form>
 </div>

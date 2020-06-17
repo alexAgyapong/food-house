@@ -8,6 +8,7 @@ import { tap, map } from 'rxjs/operators';
 import { Establishment } from 'src/app/shared/models/establishment';
 import { Cuisine } from 'src/app/shared/models/cuisine';
 import { Category } from 'src/app/shared/models/category';
+import { Categories } from './../../shared/models/category';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -24,9 +25,9 @@ export class RestaurantListComponent implements OnInit {
   rotate = false;
   totalItems: number;
   pageSize = 20;
-  establishmentTypes$: Observable<any[]>;
+  establishmentTypes$: Observable<Establishment[]>;
   cuisines$: Observable<Cuisine[]>;
-  categories$: Observable<Category[]>;
+  categories$: Observable<Categories[]>;
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
@@ -36,9 +37,14 @@ export class RestaurantListComponent implements OnInit {
     this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
     // this.getRestaurantList();
 
-    this.categories$ = this.restaurantService.getCategories();
-    this.establishmentTypes$ = this.restaurantService.getEstablishments(this.cityId);
-    this.cuisines$ = this.restaurantService.getCuisines(this.cityId);
+    this.categories$ = this.restaurantService.getCategories()
+    .pipe(map(res => res.map(x => x['categories'])));
+
+    this.establishmentTypes$ = this.restaurantService.getEstablishments(this.cityId)
+    .pipe(map(res => res.map(x => x['establishment'])));
+
+    this.cuisines$ = this.restaurantService.getCuisines(this.cityId)
+      .pipe(map(res => res.map(x => x['cuisine'])));
   }
 
   private getRestaurantList(start?: number) {
