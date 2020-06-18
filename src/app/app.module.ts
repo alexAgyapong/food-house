@@ -22,8 +22,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import {SidebarModule} from 'primeng/sidebar';
-
-
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 @NgModule({
@@ -48,6 +47,7 @@ import {SidebarModule} from 'primeng/sidebar';
     NgbTypeaheadModule,
     RatingModule,
     SidebarModule,
+    SelectButtonModule,
     ModalModule.forRoot(),
     PaginationModule.forRoot()
   ],

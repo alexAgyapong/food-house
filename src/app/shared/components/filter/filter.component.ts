@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angu
 import { Establishment } from './../../models/establishment';
 import { Categories } from './../../models/category';
 import { Cuisine } from './../../models/cuisine';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -23,6 +23,8 @@ export class FilterComponent implements OnInit, OnChanges {
   categoryIds: number[];
   cuisineIds: number[];
   establishmentTypeIds: number[];
+  topFourCategories: AbstractControl[];
+  showButton: boolean;
 
   get establishmentTypesArray(): FormArray {
     return this.filterForm.get('types') as FormArray;
@@ -37,13 +39,15 @@ export class FilterComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.addCategories();
   }
 
   ngOnChanges() {
     this.filterForm = this.fb.group({
       types: new FormArray([]),
       categories: new FormArray([]),
-      cuisines: new FormArray([])
+      cuisines: new FormArray([]),
+      test: ['']
     });
 
     this.addEstablishmentTypes();
@@ -89,6 +93,9 @@ export class FilterComponent implements OnInit, OnChanges {
         const control = new FormControl(i = 0);
         this.categoriesArray.push(control);
       });
+      this.topFourCategories = this.categoriesArray.controls.slice(0, 4);
+      this.categoriesArray.controls.length > 4 ? this.showButton = true : this.showButton = false;
+      console.log('top 4', this.topFourCategories);
     }
   }
 

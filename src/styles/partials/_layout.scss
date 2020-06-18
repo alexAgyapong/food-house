@@ -1,0 +1,16 @@
+.visible-on-mobile{
+  @include breakpoint(laptop){
+    @media screen {
+      display:none;
+    }
+  }
+}
+
+.visible-on-desktop{
+  display:none;
+  @include breakpoint(laptop){
+    @media screen {
+     @include displayGrid();
+    }
+  }
+}
