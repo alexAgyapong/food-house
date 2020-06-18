@@ -35,7 +35,7 @@
           </div>
         </a>
       </div>
-      <div *ngIf="totalItems" class="mt-3 p-3 bg-white">
+      <div *ngIf="totalItems && totalItems > 20" class="mt-3 p-3 bg-white">
         <pagination class="text-white" [totalItems]="totalItems" [itemsPerPage]="pageSize" [rotate]="rotate"
           [maxSize]="maxSize" (pageChanged)="onPageChange($event)"></pagination>
       </div>

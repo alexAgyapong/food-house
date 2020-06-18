@@ -8,13 +8,12 @@
   </header>
   <form [formGroup]="filterForm" class="py-2" (ngSubmit)="onSubmit()">
     <div>
-
+      <div class="d-flex justify-content-between pb-2">
+        <strong class="ml-3">Establisment types</strong>
+        <a *ngIf="showButton" role="button" class="font-weight-bold mr-3">See all</a>
+      </div>
       <div formArrayName="types" *ngFor="let type of establishmentTypesArray.controls; let i=index">
-        <!-- <label class="ml-3">
-          <input type="checkbox" [formControlName]="i">
-          {{establishmentTypes[i]?.name}}
-        </label> -->
-        <div class="custom-control custom-checkbox ml-3">
+        <div class="custom-control custom-checkbox ml-3 py-1">
           <input type="checkbox" class="custom-control-input" id="{{'id'+i}}" [formControlName]="i">
           <label class="custom-control-label" attr.for="{{'id'+i}}">{{establishmentTypes[i]?.name}}</label>
         </div>
@@ -25,7 +24,7 @@
         <strong class="ml-3">Categories</strong>
         <a *ngIf="showButton" role="button" class="font-weight-bold mr-3">See all</a>
       </div>
-    <!-- <div class="grid visible-on-mobile">
+      <!-- <div class="grid visible-on-mobile">
         <div formArrayName="categories" *ngFor="let item of topFourCategories; let i=index">
          <div class="ml-3">
             <label class="ck-label" for="toggle">{{categories[i].name}}</label>
@@ -33,21 +32,25 @@
          </div>
         </div>
     </div> -->
-    <div class="grid visible-on-mobile">
+      <!-- <div class="grid visible-on-mobile">
         <div *ngFor="let item of topFourCategories; let i=index">
-          <button class="btn btn-outline-secondary ml-3 mt-2">{{categories[i].name}}</button>
+          <a class="btn btn-outline-primary ml-3 mt-2" (click)="chooseCategories(categories[i].id)">{{categories[i].name}}</a>
         </div>
-    </div>
-      <div class="visible-on-desktop" formArrayName="categories" *ngFor="let cat of categoriesArray.controls; let i=index">
-        <div class="custom-control custom-checkbox ml-3">
+    </div> -->
+      <div formArrayName="categories" *ngFor="let cat of categoriesArray.controls; let i=index">
+        <div class="custom-control custom-checkbox ml-3 py-1">
           <input type="checkbox" class="custom-control-input" id="{{'cat'+i}}" [formControlName]="i">
           <label class="custom-control-label" attr.for="{{'cat'+i}}">{{categories[i]?.name}}</label>
         </div>
       </div>
     </div>
     <div class="mt-4">
+      <div class="d-flex justify-content-between pb-2">
+        <strong class="ml-3">Cuisines</strong>
+        <a *ngIf="showButton" role="button" class="font-weight-bold mr-3">See all</a>
+      </div>
       <div formArrayName="cuisines" *ngFor="let cuisine of cuisinesArray.controls; let i=index">
-        <div class="custom-control custom-checkbox ml-3">
+        <div class="custom-control custom-checkbox ml-3 py-1">
           <input type="checkbox" class="custom-control-input" id="{{'cuisine'+i}}" [formControlName]="i">
           <label class="custom-control-label" attr.for="{{'cuisine'+i}}"> {{cuisines[i]?.cuisine_name}}</label>
         </div>
