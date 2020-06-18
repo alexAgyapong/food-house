@@ -17,6 +17,7 @@ export class FilterComponent implements OnInit, OnChanges {
   @Output() selectedCategories = new EventEmitter<number[]>();
   @Output() selectedCuisines = new EventEmitter<number[]>();
   @Output() selectedEstablishmentTypes = new EventEmitter<number[]>();
+  @Output() isClosed = new EventEmitter<boolean>();
   @Output() selectedFilters = new EventEmitter<any>();
   filterForm: FormGroup;
   categoryIds: number[];
@@ -98,6 +99,10 @@ export class FilterComponent implements OnInit, OnChanges {
         this.cuisinesArray.push(control);
       });
     }
+  }
+
+  close() {
+    this.isClosed.emit(true);
   }
   onSubmit() {
     console.log('submit');

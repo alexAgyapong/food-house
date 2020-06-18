@@ -31,6 +31,7 @@ export class RestaurantListComponent implements OnInit {
   category: number[];
   cuisineIds: number[];
   establishmentTypeIds: number[];
+  showFilter = false;
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 
@@ -93,5 +94,13 @@ export class RestaurantListComponent implements OnInit {
   getSelectedEstablishmentTypes(establishmentTypeIds: number[]) {
     this.establishmentTypeIds = establishmentTypeIds;
     this.getRestaurantList();
+  }
+
+  hideFilters(isClosed: boolean) {
+    this.showFilter = !isClosed;
+  }
+
+  toggleFilter() {
+    this.showFilter = !this.showFilter;
   }
 }

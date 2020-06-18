@@ -1,11 +1,18 @@
 <section>
   <h5 class="text-center p-3">Restaurants in {{city}}</h5>
   <div class="bg-gray">
-    <app-filter [categories]="categories$|async" [establishmentTypes]="establishmentTypes$|async"
-      [cuisines]="cuisines$|async" (selectedCategories)="getSelectedCategories($event)"
-      (selectedCuisines)="getSelectedCuisines($event)"
-      (selectedEstablishmentTypes)="getSelectedEstablishmentTypes($event)"></app-filter>
-    <div class="cards">
+    <div class="text-center border bg-white py-2">
+      <a role="button" (click)="toggleFilter()">
+        <ion-icon name="options-outline"></ion-icon>Filter
+      </a>
+    </div>
+    <div *ngIf="showFilter">
+      <app-filter [categories]="categories$|async" [establishmentTypes]="establishmentTypes$|async"
+        [cuisines]="cuisines$|async" (selectedCategories)="getSelectedCategories($event)"
+        (selectedCuisines)="getSelectedCuisines($event)"
+        (selectedEstablishmentTypes)="getSelectedEstablishmentTypes($event)" (isClosed)="hideFilters($event)"></app-filter>
+    </div>
+    <div [hidden]="showFilter" class="cards">
       <div *ngFor="let rest of restaurants$|async">
         <a [routerLink]="['/restaurant', 'details',rest?.id]" [queryParams]="{city:rest?.location?.city}"
           class="card-item text-black bg-white border border-gray rounded">

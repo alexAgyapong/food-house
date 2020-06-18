@@ -13,6 +13,7 @@ import { RestaurantListComponent } from './restaurants/restaurant-list/restauran
 import { TimingsComponent } from './shared/components/timings/timings.component';
 import { ReviewsComponent } from './shared/components/reviews/reviews.component';
 import { SharedRestaurantListComponent } from './shared/components/shared-restaurant-list/shared-restaurant-list.component';
+import { FilterComponent } from './shared/components/filter/filter.component';
 
 // Libraries
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +21,8 @@ import { RatingModule } from 'ng-starrating';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { FilterComponent } from './shared/components/filter/filter.component';
+import {SidebarModule} from 'primeng/sidebar';
+
 
 
 
@@ -45,6 +47,7 @@ import { FilterComponent } from './shared/components/filter/filter.component';
     BrowserAnimationsModule,
     NgbTypeaheadModule,
     RatingModule,
+    SidebarModule,
     ModalModule.forRoot(),
     PaginationModule.forRoot()
   ],

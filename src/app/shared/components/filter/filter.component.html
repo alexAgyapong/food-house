@@ -1,9 +1,16 @@
-<div>
-  <form [formGroup]="filterForm" class="py-4" (ngSubmit)="onSubmit()">
+<div class="filter">
+  <header class="d-flex justify-content-between p-2">
+    <span>Reset</span>
+    <span>Filters</span>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </header>
+  <form [formGroup]="filterForm" class="py-2" (ngSubmit)="onSubmit()">
     <div formArrayName="types" *ngFor="let type of establishmentTypesArray.controls; let i=index">
       <!-- <label class="ml-3">
         <input type="checkbox" [formControlName]="i">
-        {{establishmentTypes[i]?.establishment?.name}}
+        {{establishmentTypes[i]?.name}}
       </label> -->
       <div class="custom-control custom-checkbox ml-3">
         <input type="checkbox" class="custom-control-input" id="{{'id'+i}}" [formControlName]="i">
@@ -26,6 +33,6 @@
         </div>
       </div>
     </div>
-    <div class="text-center mt-4"> <button type="submit" class="btn btn-secondary w-90">Apply</button></div>
+    <div class="sticky-bottom text-center mt-4"> <button type="submit" class="btn btn-secondary w-90">Apply</button></div>
   </form>
 </div>
