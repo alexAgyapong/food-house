@@ -67,6 +67,8 @@ a {
   min-width: 100vw;
   overflow: auto;
   background-color: white;
+  border-radius: .2rem;
+  border: 1px solid $light-gray;
 
   @include breakpoint(laptop) {
     position: relative;

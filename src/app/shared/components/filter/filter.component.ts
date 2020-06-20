@@ -92,9 +92,7 @@ export class FilterComponent implements OnInit, OnChanges {
         const control = new FormControl(i = 0);
         this.categoriesArray.push(control);
       });
-      this.topFourCategories = this.categoriesArray.controls.slice(0, 4);
       this.categoriesArray.controls.length > 4 ? this.showButton = true : this.showButton = false;
-      console.log('top 4', this.topFourCategories);
     }
   }
 
@@ -110,7 +108,7 @@ export class FilterComponent implements OnInit, OnChanges {
   close() {
     this.isClosed.emit(true);
   }
-  
+
   onSubmit() {
     console.log('submit');
 
