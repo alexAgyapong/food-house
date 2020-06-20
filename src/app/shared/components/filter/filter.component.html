@@ -1,5 +1,5 @@
 <div class="filter">
-  <header class="d-flex justify-content-between p-2">
+  <header class="filter-header">
     <span>Reset</span>
     <span>Filters</span>
     <button type="button" class="close" aria-label="Close" (click)="close()">
@@ -10,19 +10,21 @@
     <div>
       <div class="d-flex justify-content-between pb-2">
         <strong class="ml-3">Establisment types</strong>
-        <a *ngIf="showButton" role="button" class="font-weight-bold mr-3">See all</a>
+        <a *ngIf="showButton" role="button" class="visible-on-mobile font-weight-bold mr-3">See all</a>
       </div>
-      <div formArrayName="types" *ngFor="let type of establishmentTypesArray.controls; let i=index">
-        <div class="custom-control custom-checkbox ml-3 py-1">
-          <input type="checkbox" class="custom-control-input" id="{{'id'+i}}" [formControlName]="i">
-          <label class="custom-control-label" attr.for="{{'id'+i}}">{{establishmentTypes[i]?.name}}</label>
+     <div class="filter-item">
+        <div formArrayName="types" *ngFor="let type of establishmentTypesArray.controls; let i=index">
+          <div class="custom-control custom-checkbox ml-3 py-1">
+            <input type="checkbox" class="custom-control-input" id="{{'id'+i}}" [formControlName]="i">
+            <label class="custom-control-label" attr.for="{{'id'+i}}">{{establishmentTypes[i]?.name}}</label>
+          </div>
         </div>
-      </div>
+     </div>
     </div>
     <div class="mt-4">
       <div class="d-flex justify-content-between pb-2">
         <strong class="ml-3">Categories</strong>
-        <a *ngIf="showButton" role="button" class="font-weight-bold mr-3">See all</a>
+        <a *ngIf="showButton" role="button" class="visible-on-mobile font-weight-bold mr-3">See all</a>
       </div>
       <!-- <div class="grid visible-on-mobile">
         <div formArrayName="categories" *ngFor="let item of topFourCategories; let i=index">
@@ -37,22 +39,26 @@
           <a class="btn btn-outline-primary ml-3 mt-2" (click)="chooseCategories(categories[i].id)">{{categories[i].name}}</a>
         </div>
     </div> -->
-      <div formArrayName="categories" *ngFor="let cat of categoriesArray.controls; let i=index">
-        <div class="custom-control custom-checkbox ml-3 py-1">
-          <input type="checkbox" class="custom-control-input" id="{{'cat'+i}}" [formControlName]="i">
-          <label class="custom-control-label" attr.for="{{'cat'+i}}">{{categories[i]?.name}}</label>
+    <div class="filter-item">
+        <div formArrayName="categories" *ngFor="let cat of categoriesArray.controls; let i=index">
+          <div class="custom-control custom-checkbox ml-3 py-1">
+            <input type="checkbox" class="custom-control-input" id="{{'cat'+i}}" [formControlName]="i">
+            <label class="custom-control-label" attr.for="{{'cat'+i}}">{{categories[i]?.name}}</label>
+          </div>
         </div>
-      </div>
+    </div>
     </div>
     <div class="mt-4">
       <div class="d-flex justify-content-between pb-2">
         <strong class="ml-3">Cuisines</strong>
-        <a *ngIf="showButton" role="button" class="font-weight-bold mr-3">See all</a>
+        <a *ngIf="showButton" role="button" class="visible-on-mobile font-weight-bold mr-3">See all</a>
       </div>
-      <div formArrayName="cuisines" *ngFor="let cuisine of cuisinesArray.controls; let i=index">
-        <div class="custom-control custom-checkbox ml-3 py-1">
-          <input type="checkbox" class="custom-control-input" id="{{'cuisine'+i}}" [formControlName]="i">
-          <label class="custom-control-label" attr.for="{{'cuisine'+i}}"> {{cuisines[i]?.cuisine_name}}</label>
+      <div class="filter-item">
+        <div formArrayName="cuisines" *ngFor="let cuisine of cuisinesArray.controls; let i=index">
+          <div class="custom-control custom-checkbox ml-3 py-1">
+            <input type="checkbox" class="custom-control-input" id="{{'cuisine'+i}}" [formControlName]="i">
+            <label class="custom-control-label" attr.for="{{'cuisine'+i}}"> {{cuisines[i]?.cuisine_name}}</label>
+          </div>
         </div>
       </div>
     </div>

@@ -31,7 +31,7 @@ export class RestaurantListComponent implements OnInit {
   category: number[];
   cuisineIds: number[];
   establishmentTypeIds: number[];
-  showFilter = false;
+  showFilter = true;
 
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute) { }
 

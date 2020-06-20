@@ -1,5 +1,31 @@
+/* The emerging W3C standard
+   that is currently Firefox-only */
+:host {
+  --scroll-thumb-color:hsl(0, 0%, 60%);
+  --scroll-track-color: hsl(210, 16.7%, 97.6%);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb-color) var(--scroll-track-color);
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scroll-track-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: 20px;
+  border: 3px solid var(--scroll-track-color);
+}
 .ck-label {
-  background: #A5D6A7;
+  background: #a5d6a7;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
 }
@@ -9,4 +35,9 @@
   left: -100vw;
 
   /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead. It can be better for accessibilty on some touch devices for discoverability. */
+}
+
+.filter-item {
+  max-height: 400px;
+  overflow: auto;
 }

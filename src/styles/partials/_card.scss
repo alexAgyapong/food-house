@@ -26,11 +26,11 @@
   @include breakpoint(laptop) {
     @media screen {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
-      gap: 1rem;
-      padding: 1.5rem;
-      width: 90vw;
-      margin: 0 auto;
+      // grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+      // gap: 1rem;
+      // padding: 1.5rem;
+      // width: 90vw;
+      // margin: 0 auto;
     }
   }
 }
@@ -40,11 +40,10 @@
   p {
     margin-bottom: 0.2rem;
   }
-  font-size: large;
   margin-bottom: 1rem;
   @include breakpoint(laptop) {
     @media screen {
-      width: 25vw;
+      @include displayFlex(row, flex-start, flex-start);
     }
   }
 }
@@ -53,12 +52,16 @@
   @include displayFlex(column);
 }
 
+.image-container{
+  width: 100%;
+}
+
 .card-image {
   @include breakpoint(laptop) {
     @media screen {
-      object-fit: contain;
-      width: 100%;
-      height: 100%;
+      object-fit: cover;
+      width: 268px;
+      height: 212px;
     }
   }
 }

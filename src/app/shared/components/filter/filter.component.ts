@@ -46,8 +46,7 @@ export class FilterComponent implements OnInit, OnChanges {
     this.filterForm = this.fb.group({
       types: new FormArray([]),
       categories: new FormArray([]),
-      cuisines: new FormArray([]),
-      test: ['']
+      cuisines: new FormArray([])
     });
 
     this.addEstablishmentTypes();
@@ -75,7 +74,7 @@ export class FilterComponent implements OnInit, OnChanges {
           .filter(v => v !== null);
         this.selectedEstablishmentTypes.emit(this.establishmentTypeIds);
       }
-    })
+    });
   }
 
   addEstablishmentTypes() {
@@ -111,6 +110,7 @@ export class FilterComponent implements OnInit, OnChanges {
   close() {
     this.isClosed.emit(true);
   }
+  
   onSubmit() {
     console.log('submit');
 
@@ -124,6 +124,6 @@ export class FilterComponent implements OnInit, OnChanges {
     const ids = this.categoriesArray.controls
       .map((v, i) => (v.value ? this.categories[i] : null))
       .filter(v => v !== null);
-    console.log('ids', ids)
+    console.log('ids', ids);
   }
 }

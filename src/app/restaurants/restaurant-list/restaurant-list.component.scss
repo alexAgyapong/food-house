@@ -1,3 +1,5 @@
+@import '../../../styles/partials/variables';
+
 .pagination-page .page-item,
 .active {
   background: green !important;
@@ -7,4 +9,11 @@
 
 .page-link{
   color:red !important;
+}
+
+.grid-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

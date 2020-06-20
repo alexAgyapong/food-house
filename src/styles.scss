@@ -11,7 +11,7 @@
 body {
   margin: 0;
   padding: 0;
-  // font-size: 16px;
+  font-size: 14px;
 }
 
 a {
@@ -66,9 +66,22 @@ a {
   bottom: 0;
   min-width: 100vw;
   overflow: auto;
-  background-color:white;
+  background-color: white;
+
+  @include breakpoint(laptop) {
+    position: relative;
+    min-width: 150px;
+  }
 }
 
+.filter-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  @include breakpoint(laptop) {
+    display: none;
+  }
+}
 .sticky-bottom {
   position: sticky;
   bottom: 0;
